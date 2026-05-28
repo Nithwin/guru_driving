@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import "./globals.css";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-});
-
 export const metadata: Metadata = {
-  title: "Sri Guru Driving School | Master the Road",
+  title: "Sri Guru Driving School | Master the Road with Precision",
   description:
-    "A responsive driving school landing page for Sri Guru Driving School, built from scratch with a bold, high-contrast visual style.",
+    "Premium driving education in the heart of the city. Safety-focused, RTO-certified, and trusted by 5000+ graduates. Book your first lesson today.",
+  keywords: "driving school, learn to drive, RTO, driving lessons, beginner driving, Sri Guru",
 };
 
 export default function RootLayout({
@@ -19,8 +14,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans">
+    <html lang="en" className="h-full">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body
+        className="min-h-full"
+        style={{ fontFamily: "'Montserrat', system-ui, sans-serif", background: "#fafafa" }}
+      >
         {children}
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, Variant } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, ReactNode } from "react";
 
 type RevealProps = {
@@ -11,7 +11,6 @@ type RevealProps = {
   className?: string;
   style?: React.CSSProperties;
   once?: boolean;
-  as?: keyof JSX.IntrinsicElements;
 };
 
 const EASE = [0.76, 0, 0.24, 1] as const;
@@ -138,5 +137,5 @@ export function StaggerContainer({
 
 export const staggerChild = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.76, 0, 0.24, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
 };

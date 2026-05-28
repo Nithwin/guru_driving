@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { CarFront, Menu, Phone, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Phone, Menu, X } from "lucide-react";
 
-const navigation = [
-  { label: "Home", href: "#home", active: true },
+const NAV = [
+  { label: "Home", href: "#home" },
   { label: "Training Plans", href: "#plans" },
   { label: "Fleet", href: "#fleet" },
   { label: "Testimonials", href: "#reviews" },
@@ -12,71 +15,41 @@ const navigation = [
 ];
 
 export function SiteHeader() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("Home");
+  const { scrollY } = useScroll();
+  const shadow = useTransform(scrollY, [0, 60], ["0 0 0 rgba(0,0,0,0)", "0 2px 24px rgba(0,0,0,0.08)"]);
+  const borderOpacity = useTransform(scrollY, [0, 60], [0, 1]);
 
   return (
-    <header
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        background: "#ffffff",
-        borderBottom: "1px solid #e5e7eb",
-        boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
-      }}
+    <motion.header
+      style={{ boxShadow: shadow }}
+      className="site-header"
     >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "0 1.25rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: 64,
-          gap: "1rem",
-        }}
-      >
+      <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
         {/* Logo */}
-        <a href="#home" style={{ display: "flex", alignItems: "center", gap: "0.6rem", textDecoration: "none" }}>
-          <div
-            style={{
-              width: 38,
-              height: 38,
-              background: "var(--accent)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 4,
-            }}
-          >
-            <CarFront size={20} color="#fff" />
+        <a href="#home" style={{ display: "flex", alignItems: "center", gap: "0.65rem", textDecoration: "none" }}>
+          <div style={{ width: 36, height: 36, position: "relative", flexShrink: 0 }}>
+            <Image src="/logo-icon.png" alt="Sri Guru Logo" fill sizes="36px" style={{ objectFit: "contain" }} />
           </div>
-          <div>
-            <p style={{ fontSize: "0.6rem", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--muted)", lineHeight: 1.2 }}>
+          <div style={{ lineHeight: 1.15 }}>
+            <p style={{ fontSize: "0.58rem", fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--muted)" }}>
               Sri Guru Driving School
             </p>
-            <p style={{ fontSize: "1rem", fontWeight: 900, color: "var(--accent)", lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+            <p style={{ fontSize: "1rem", fontWeight: 900, color: "var(--accent)", letterSpacing: "-0.01em" }}>
               Master the Road
             </p>
           </div>
         </a>
 
-        {/* Desktop Nav */}
-        <nav style={{ display: "flex", alignItems: "center", gap: "2rem" }} className="hidden md:flex">
-          {navigation.map((item) => (
+        {/* Desktop nav */}
+        <nav className="hidden md:flex" style={{ gap: "2.2rem", alignItems: "center" }}>
+          {NAV.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              style={{
-                fontSize: "0.82rem",
-                fontWeight: 700,
-                textDecoration: "none",
-                color: item.active ? "var(--accent)" : "var(--ink)",
-                borderBottom: item.active ? "2px solid var(--accent)" : "2px solid transparent",
-                paddingBottom: 2,
-                transition: "color 0.15s",
-              }}
+              onClick={() => setActive(item.label)}
+              className={`nav-link${active === item.label ? " active" : ""}`}
             >
               {item.label}
             </a>
@@ -84,105 +57,93 @@ export function SiteHeader() {
         </nav>
 
         {/* CTA */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <a
+        <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+          <motion.a
             href="tel:+919000000000"
-            className="hidden sm:inline-flex"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
             style={{
-              display: "inline-flex",
               alignItems: "center",
               gap: "0.4rem",
               background: "var(--accent)",
-              color: "#ffffff",
-              border: "none",
-              borderRadius: 4,
-              padding: "0.55rem 1.1rem",
-              fontSize: "0.78rem",
+              color: "#fff",
+              padding: "0.55rem 1.15rem",
+              fontSize: "0.75rem",
               fontWeight: 800,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
               textDecoration: "none",
-              cursor: "pointer",
+              borderRadius: 3,
+              border: "none",
+            }}
+            className="hidden sm:inline-flex"
+          >
+            <Phone size={13} />
+            Call Now
+          </motion.a>
+
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden"
+            style={{ background: "none", border: "1.5px solid var(--border-dark)", padding: "0.4rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 2 }}
+            aria-label="Menu"
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile drawer */}
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
+        style={{ overflow: "hidden", borderTop: open ? "1px solid var(--border)" : "none", background: "#fff" }}
+        className="md:hidden"
+      >
+        <div style={{ padding: "0.75rem 1.5rem 1.25rem", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+          {NAV.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={() => { setActive(item.label); setOpen(false); }}
+              style={{
+                padding: "0.75rem 0",
+                fontSize: "0.85rem",
+                fontWeight: 700,
+                textDecoration: "none",
+                color: active === item.label ? "var(--accent)" : "var(--ink)",
+                borderBottom: "1px solid var(--border)",
+                display: "block",
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href="tel:+919000000000"
+            style={{
+              marginTop: "0.75rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.4rem",
+              background: "var(--accent)",
+              color: "#fff",
+              padding: "0.85rem",
+              fontSize: "0.8rem",
+              fontWeight: 800,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              borderRadius: 3,
             }}
           >
             <Phone size={14} />
             Call Now
           </a>
-
-          <button
-            type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            className="md:hidden"
-            style={{
-              background: "none",
-              border: "2px solid var(--ink)",
-              padding: "0.4rem",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
         </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div
-          style={{
-            background: "#ffffff",
-            borderTop: "1px solid #e5e7eb",
-            padding: "1rem 1.25rem",
-          }}
-          className="md:hidden"
-        >
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-            {navigation.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  display: "block",
-                  padding: "0.75rem 1rem",
-                  fontWeight: 700,
-                  fontSize: "0.85rem",
-                  textDecoration: "none",
-                  color: item.active ? "var(--accent)" : "var(--ink)",
-                  border: "1px solid #e5e7eb",
-                  background: item.active ? "#fff5f7" : "#ffffff",
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
-            <a
-              href="tel:+919000000000"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.4rem",
-                marginTop: "0.5rem",
-                background: "var(--accent)",
-                color: "#ffffff",
-                padding: "0.75rem",
-                fontWeight: 800,
-                fontSize: "0.82rem",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-              }}
-            >
-              <Phone size={14} />
-              Call Now
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
+      </motion.div>
+    </motion.header>
   );
 }
