@@ -62,31 +62,34 @@ export function HeroSection() {
         {/* Headline */}
         <div style={{ overflow: "visible" }}>
           <h1 style={{
-            fontSize: "clamp(3rem, 7vw, 6.5rem)",
+            fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
             fontWeight: 900,
-            lineHeight: 0.95,
-            letterSpacing: "-0.04em",
+            lineHeight: 0.98,
+            letterSpacing: "-0.03em",
             textTransform: "uppercase",
             color: "var(--ink)",
-            maxWidth: 620,
+            maxWidth: 580,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
           }}>
             <RevealText text="MASTER" delay={0.15} style={{ display: "block" }} />
             <RevealText text="THE ROAD" delay={0.35} style={{ display: "block" }} />
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <RevealText text="WITH" delay={0.55} style={{ marginRight: "0.3em" }} />
+            <div style={{ display: "inline-block", marginTop: "0.1em", wordWrap: "break-word", whiteSpace: "normal" }}>
+              <RevealText text="WITH" delay={0.55} style={{ marginRight: "0.25em", display: "inline-block" }} />
               <span style={{ color: "var(--accent)", position: "relative", display: "inline-block" }}>
-                <RevealText text="PRECISION." delay={0.65} />
+                <RevealText text="PRECISION." delay={0.65} style={{ display: "inline-block" }} />
                 {/* Underline accent */}
                 <motion.span
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
-                  transition={{ delay: 1.2, duration: 0.55, ease: EASE }}
+                  transition={{ delay: 1.2, duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
                   style={{
                     position: "absolute",
-                    bottom: "-0.1em",
+                    bottom: "0.05em",
                     left: 0,
                     right: 0,
-                    height: "0.12em",
+                    height: "0.1em",
                     background: "var(--yellow)",
                     transformOrigin: "left",
                     display: "block",
