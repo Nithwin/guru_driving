@@ -5,6 +5,7 @@ import { InstructorPhilosophy } from "./InstructorPhilosophy";
 import { StatsSection } from "./StatsSection";
 import { PricingPlans } from "./PricingPlans";
 import { FleetShowcase } from "./FleetShowcase";
+import { NightDrive } from "./NightDrive";
 import { ReviewsAndFaq } from "./ReviewsAndFaq";
 import { CtaSection } from "./CtaSection";
 
@@ -25,6 +26,9 @@ export function MainContent() {
 
       {/* 5. Fleet Showcase & Scenic Callout */}
       <FleetShowcase />
+
+      {/* 5.5 Cinematic Night Drive Section */}
+      <NightDrive />
 
       {/* 6. Customer Reviews / Testimonials & FAQ Accordion */}
       <ReviewsAndFaq />
