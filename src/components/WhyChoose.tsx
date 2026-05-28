@@ -21,7 +21,7 @@ export function WhyChoose() {
       <div className="features-grid" style={{ marginTop: "2.5rem" }}>
         {/* Cell 1 – large white: Advanced Safety */}
         <motion.div
-          whileHover={{ background: "#0d0d0d" }}
+          whileHover={{ background: "var(--yellow)" }}
           transition={{ duration: 0.3 }}
           className="feature-cell white"
           style={{
@@ -36,7 +36,7 @@ export function WhyChoose() {
           onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
             const el = e.currentTarget;
             el.querySelectorAll<HTMLElement>(".hover-invert").forEach(n => {
-              n.style.color = "#fff";
+              n.style.color = "var(--yellow-ink)";
             });
           }}
           onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
@@ -129,9 +129,9 @@ export function WhyChoose() {
         {/* Cell 4 – light: Local Pros */}
         <motion.div
           className="feature-cell"
-          whileHover={{ scale: 1.02, background: "#eef2ff" }}
+          whileHover={{ scale: 1.02, background: "#fdf0c8" }}
           transition={{ duration: 0.22 }}
-          style={{ background: "#f0f4ff", borderRight: "none", display: "flex", alignItems: "flex-start", gap: "1rem" }}
+          style={{ background: "#fef9e7", borderRight: "none", gridColumn: "1 / -1", display: "flex", alignItems: "flex-start", gap: "1rem" }}
         >
           <Reveal3D delay={0.2} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
             <div style={{

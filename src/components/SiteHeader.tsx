@@ -34,10 +34,10 @@ export function SiteHeader() {
           </div>
           <div style={{ lineHeight: 1.15 }}>
             <p style={{ fontSize: "0.58rem", fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--muted)" }}>
-              Sri Guru Driving School
+              Master the Road
             </p>
             <p style={{ fontSize: "1rem", fontWeight: 900, color: "var(--accent)", letterSpacing: "-0.01em" }}>
-              Master the Road
+              Sri Guru Driving School
             </p>
           </div>
         </a>
@@ -59,14 +59,14 @@ export function SiteHeader() {
         {/* CTA */}
         <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
           <motion.a
-            href="tel:+919000000000"
+            href="tel:+917092063335"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             style={{
               alignItems: "center",
               gap: "0.4rem",
-              background: "var(--accent)",
-              color: "#fff",
+              background: "var(--yellow)",
+              color: "var(--yellow-ink)",
               padding: "0.55rem 1.15rem",
               fontSize: "0.75rem",
               fontWeight: 800,
@@ -121,15 +121,15 @@ export function SiteHeader() {
             </a>
           ))}
           <a
-            href="tel:+919000000000"
+            href="tel:+917092063335"
             style={{
               marginTop: "0.75rem",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               gap: "0.4rem",
-              background: "var(--accent)",
-              color: "#fff",
+              background: "var(--yellow)",
+              color: "var(--yellow-ink)",
               padding: "0.85rem",
               fontSize: "0.8rem",
               fontWeight: 800,

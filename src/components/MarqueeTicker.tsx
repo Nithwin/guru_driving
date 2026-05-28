@@ -61,8 +61,8 @@ export function MarqueeTicker() {
       whiteSpace: "nowrap", 
       borderTop: "2px solid var(--ink)", 
       borderBottom: "2px solid var(--ink)", 
-      background: "var(--ink)", 
-      color: "#fff", 
+      background: "var(--yellow)", 
+      color: "var(--ink)", 
       padding: "1.2rem 0",
       marginTop: "4rem"
     }}>

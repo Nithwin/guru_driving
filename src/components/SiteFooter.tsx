@@ -99,9 +99,9 @@ export function SiteFooter() {
                   transition: "border-color 0.15s, color 0.15s, background 0.15s",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--accent)";
-                  e.currentTarget.style.color = "#fff";
-                  e.currentTarget.style.background = "var(--accent)";
+                  e.currentTarget.style.borderColor = "var(--yellow)";
+                  e.currentTarget.style.color = "var(--yellow-ink)";
+                  e.currentTarget.style.background = "var(--yellow)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";

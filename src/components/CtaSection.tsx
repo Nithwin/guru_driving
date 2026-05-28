@@ -6,7 +6,7 @@ import { ArrowRight, Check, Zap } from "lucide-react";
 import { Reveal } from "./Animations";
 import { MagneticButton } from "./MagneticButton";
 
-const PLANS = ["Beginner", "Refresher", "Pro Mastery"];
+const PLANS = ["Beginner", "Medium", "Advanced"];
 const TRANSMISSION = ["Manual", "Automatic"];
 
 export function CtaSection() {
@@ -15,7 +15,7 @@ export function CtaSection() {
   const [trans, setTrans] = useState(TRANSMISSION[0]);
 
   return (
-    <section id="contact" className="cta-section" style={{ marginTop: "5rem", padding: "4rem 1.5rem", background: "var(--ink)", color: "#fff" }}>
+    <section id="contact" className="cta-section" style={{ marginTop: "5rem", padding: "4rem 1.5rem", background: "var(--yellow)", color: "var(--ink)" }}>
       <div style={{
         maxWidth: 1000,
         margin: "0 auto",
@@ -34,22 +34,54 @@ export function CtaSection() {
             lineHeight: 1.04, letterSpacing: "-0.02em",
           }}>
             Ignite Your <br />
-            <span style={{ color: "var(--yellow)" }}>Engine.</span>
+            <span style={{ color: "var(--accent)" }}>Engine.</span>
           </h2>
-          <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "rgba(255,255,255,0.6)", marginTop: "1.25rem", maxWidth: 400 }}>
+          <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "var(--yellow-ink)", marginTop: "1.25rem", maxWidth: 400 }}>
             No more boring forms. Configure your training setup exactly how you want it, and our instructors will be ready.
           </p>
+
+          {/* Location Map */}
+          <div style={{
+            marginTop: "2.5rem",
+            maxWidth: 400,
+            height: 180,
+            borderRadius: 6,
+            border: "2px solid var(--ink)",
+            overflow: "hidden",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+            position: "relative"
+          }}>
+            <div style={{
+              position: "absolute", top: 0, left: 0, right: 0,
+              padding: "0.4rem 0.75rem", background: "var(--ink)", color: "#fff",
+              fontSize: "0.65rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase",
+              display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 2
+            }}>
+              <span>Our Training Hub</span>
+              <span style={{ color: "var(--yellow)" }}>Open Today</span>
+            </div>
+            <iframe
+              src="https://maps.google.com/maps?q=Kolathur,+Mettur,+Salem,+Tamil+Nadu&t=&z=14&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: "grayscale(100%) contrast(1.1)", transform: "translateY(15px)" }}
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
         </Reveal>
 
         {/* Right Side: Dashboard UI */}
         <Reveal delay={0.15}>
           <div style={{
-            background: "#161616",
-            border: "1.5px solid rgba(255,255,255,0.1)",
+            background: "#0f0f0f",
+            border: "1.5px solid rgba(255,255,255,0.08)",
             borderRadius: 8,
             padding: "2.5rem",
             position: "relative",
-            overflow: "hidden"
+            overflow: "hidden",
+            color: "#fff"
           }}>
             {/* Steps indicator */}
             <div style={{ display: "flex", gap: "0.5rem", marginBottom: "2rem" }}>

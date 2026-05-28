@@ -91,7 +91,7 @@ export function FleetShowcase() {
               whileTap={{ scale: 0.97 }}
               style={{
                 display: "inline-flex", alignItems: "center", gap: "0.4rem",
-                background: "var(--accent)", color: "#fff",
+                background: "var(--yellow)", color: "var(--yellow-ink)",
                 padding: "0.7rem 1.4rem", fontSize: "0.72rem",
                 fontWeight: 800, letterSpacing: "0.1em",
                 textTransform: "uppercase", textDecoration: "none",

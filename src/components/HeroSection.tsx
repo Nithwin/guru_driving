@@ -11,7 +11,7 @@ const CarScene = dynamic(() => import("./CarScene").then((m) => ({ default: m.Ca
     <div style={{
       height: "100%",
       width: "100%",
-      background: "linear-gradient(135deg,#111 0%,#1a1a2e 100%)",
+      background: "linear-gradient(135deg,#f5c800 0%,#e6b800 100%)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -44,9 +44,9 @@ export function HeroSection() {
             display: "inline-flex",
             alignItems: "center",
             gap: "0.4rem",
-            background: "#fff5f7",
-            border: "1.5px solid #ffccd5",
-            color: "var(--accent)",
+            background: "#fef9e7",
+            border: "1.5px solid var(--yellow-dark)",
+            color: "var(--yellow-ink)",
             fontSize: "0.65rem",
             fontWeight: 800,
             letterSpacing: "0.22em",
@@ -112,14 +112,14 @@ export function HeroSection() {
           <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", alignItems: "center" }}>
             <motion.a
               href="#plans"
-              whileHover={{ scale: 1.03, boxShadow: "0 8px 28px rgba(204,0,51,0.35)" }}
+              whileHover={{ scale: 1.03, boxShadow: "0 8px 28px rgba(245,200,0,0.45)" }}
               whileTap={{ scale: 0.97 }}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.5rem",
-                background: "var(--accent)",
-                color: "#fff",
+                background: "var(--yellow)",
+                color: "var(--yellow-ink)",
                 padding: "0.9rem 1.9rem",
                 fontSize: "0.78rem",
                 fontWeight: 800,
@@ -127,7 +127,7 @@ export function HeroSection() {
                 textTransform: "uppercase",
                 textDecoration: "none",
                 borderRadius: 3,
-                border: "2px solid var(--accent)",
+                border: "2px solid var(--yellow)",
               }}
             >
               Book Your First Lesson
@@ -186,10 +186,10 @@ export function HeroSection() {
         </Reveal>
       </div>
 
-      {/* ── RIGHT: Premium floating car ── */}
-      <Reveal delay={0.2} y={40} style={{ position: "relative" }}>
-        {/* Outer positioning wrapper — no box, no border */}
-        <div style={{ position: "relative", minHeight: 500 }}>
+      {/* ── RIGHT: Premium floating car — NO Reveal wrapper so it never disappears on scroll ── */}
+      <div style={{ position: "relative" }}>
+        {/* Outer positioning wrapper */}
+        <div style={{ position: "relative", minHeight: 520 }}>
 
           {/* ── Decorative background circle ── */}
           <svg
@@ -202,12 +202,9 @@ export function HeroSection() {
             }}
             viewBox="0 0 400 400"
           >
-            {/* Large pale-red outer ring */}
-            <circle cx="200" cy="200" r="195" fill="none" stroke="var(--accent)" strokeWidth="1.5" opacity="0.12" />
-            <circle cx="200" cy="200" r="155" fill="none" stroke="var(--accent)" strokeWidth="1" opacity="0.08" />
-            {/* Solid tinted disc */}
-            <circle cx="200" cy="200" r="120" fill="#cc0033" opacity="0.04" />
-            {/* Dot grid */}
+            <circle cx="200" cy="200" r="195" fill="none" stroke="var(--yellow)" strokeWidth="1.5" opacity="0.25" />
+            <circle cx="200" cy="200" r="155" fill="none" stroke="var(--yellow)" strokeWidth="1" opacity="0.14" />
+            <circle cx="200" cy="200" r="120" fill="var(--yellow)" opacity="0.05" />
             {[...Array(7)].map((_, row) =>
               [...Array(7)].map((__, col) => (
                 <circle
@@ -222,13 +219,12 @@ export function HeroSection() {
             )}
           </svg>
 
-          {/* ── 3D Canvas (no box, transparent bg) ── */}
+          {/* ── 3D Canvas — always mounted, never hidden ── */}
           <div
             style={{
               position: "absolute",
-              inset: "10% 0 10% 0",
+              inset: "5% 0 5% 0",
               zIndex: 1,
-              /* touch-action fix for gesture lib warning */
               touchAction: "none",
             }}
           >
@@ -335,20 +331,20 @@ export function HeroSection() {
             </p>
           </motion.div>
 
-          {/* ── Decorative red vertical stripe ── */}
+          {/* ── Decorative yellow vertical stripe ── */}
           <div style={{
             position: "absolute",
             right: "-1.5rem",
             top: "15%",
             bottom: "15%",
             width: 3,
-            background: "linear-gradient(180deg, transparent, var(--accent) 40%, var(--accent) 60%, transparent)",
+            background: "linear-gradient(180deg, transparent, var(--yellow) 40%, var(--yellow) 60%, transparent)",
             borderRadius: 2,
             zIndex: 0,
-            opacity: 0.5,
+            opacity: 0.6,
           }} />
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }

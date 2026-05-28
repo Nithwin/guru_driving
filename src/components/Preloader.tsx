@@ -60,7 +60,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
             style={{
               position: "absolute",
               inset: 0,
-              background: "#0d0d0d",
+              background: "var(--yellow)",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -77,7 +77,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
                 position: "absolute",
                 width: "40vw",
                 height: "40vw",
-                background: "radial-gradient(circle, rgba(204,0,51,0.15) 0%, transparent 70%)",
+                background: "radial-gradient(circle, rgba(204,0,51,0.12) 0%, transparent 70%)",
                 borderRadius: "50%",
                 pointerEvents: "none",
                 zIndex: 0
@@ -95,7 +95,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
                 transform: "translate(-50%, -50%)",
                 fontSize: "clamp(12rem, 35vw, 40rem)",
                 fontWeight: 900,
-                color: "rgba(255, 255, 255, 0.03)",
+                color: "rgba(0, 0, 0, 0.06)",
                 fontFamily: "monospace",
                 lineHeight: 1,
                 zIndex: 0,
@@ -133,7 +133,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
                     fontWeight: 900,
                     textTransform: "uppercase",
                     letterSpacing: "0.2em",
-                    color: "#fff",
+                    color: "var(--ink)",
                     textAlign: "center",
                     margin: 0,
                     lineHeight: 1.2
@@ -153,7 +153,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
                     fontSize: "0.75rem",
                     fontWeight: 700,
                     letterSpacing: "0.3em",
-                    color: "rgba(255,255,255,0.5)",
+                    color: "rgba(0,0,0,0.5)",
                     textTransform: "uppercase",
                   }}
                 >
@@ -165,7 +165,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
               <motion.div
                 style={{
                   height: 1,
-                  background: "rgba(255,255,255,0.1)",
+                  background: "rgba(0,0,0,0.12)",
                   width: "min(320px, 70vw)",
                   marginTop: "2.5rem",
                   position: "relative",
@@ -177,14 +177,14 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
                     height: "100%",
                     background: "var(--accent)",
                     width: `${progress}%`,
-                    boxShadow: "0 0 15px var(--accent)",
+                    boxShadow: "0 0 15px rgba(204,0,51,0.5)",
                   }}
                 />
               </motion.div>
 
               {/* Exact Percentage Readout */}
               <div style={{ display: "flex", justifyContent: "space-between", width: "min(320px, 70vw)", marginTop: "0.75rem" }}>
-                <span style={{ fontSize: "0.65rem", fontFamily: "monospace", color: "rgba(255,255,255,0.4)" }}>LOADING</span>
+                <span style={{ fontSize: "0.65rem", fontFamily: "monospace", color: "rgba(0,0,0,0.45)" }}>LOADING</span>
                 <span style={{ fontSize: "0.65rem", fontFamily: "monospace", color: "var(--accent)", fontWeight: "bold" }}>
                   {progress.toString().padStart(3, "0")}%
                 </span>
@@ -193,10 +193,10 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
 
             {/* Corner Decorative Elements */}
             {[
-              { top: 40, left: 40, borderTop: "2px solid #fff", borderLeft: "2px solid #fff" },
-              { top: 40, right: 40, borderTop: "2px solid #fff", borderRight: "2px solid #fff" },
-              { bottom: 40, left: 40, borderBottom: "2px solid #fff", borderLeft: "2px solid #fff" },
-              { bottom: 40, right: 40, borderBottom: "2px solid #fff", borderRight: "2px solid #fff" },
+              { top: 40, left: 40, borderTop: "2px solid var(--ink)", borderLeft: "2px solid var(--ink)" },
+              { top: 40, right: 40, borderTop: "2px solid var(--ink)", borderRight: "2px solid var(--ink)" },
+              { bottom: 40, left: 40, borderBottom: "2px solid var(--ink)", borderLeft: "2px solid var(--ink)" },
+              { bottom: 40, right: 40, borderBottom: "2px solid var(--ink)", borderRight: "2px solid var(--ink)" },
             ].map((style, i) => (
               <motion.div
                 key={i}
