@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import { ShieldCheck, Clock3, CarFront, BadgeCheck, ArrowRight } from "lucide-react";
-import { Reveal } from "./Animations";
+import { Reveal, Reveal3D } from "./Animations";
 
 export function WhyChoose() {
   return (
     <section style={{ marginTop: "5rem" }}>
-      <Reveal>
+      <Reveal3D>
         <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>Why Choose Sri Guru</p>
         <h2 className="section-title">
           Built for Confidence,
@@ -15,7 +15,7 @@ export function WhyChoose() {
           Speed, & <span className="accent">Safe Progress.</span>
         </h2>
         <div style={{ width: 48, height: 3, background: "var(--accent)", marginTop: "0.75rem" }} />
-      </Reveal>
+      </Reveal3D>
 
       {/* Bento features grid */}
       <div className="features-grid" style={{ marginTop: "2.5rem" }}>
@@ -46,7 +46,7 @@ export function WhyChoose() {
             });
           }}
         >
-          <Reveal delay={0.05}>
+          <Reveal3D delay={0.05}>
             <div style={{
               width: 46, height: 46,
               border: "2px solid var(--ink)",
@@ -62,9 +62,9 @@ export function WhyChoose() {
             <p className="hover-invert" style={{ fontSize: "0.84rem", lineHeight: 1.8, color: "var(--muted)", transition: "color 0.3s" }}>
               Beyond the basics — defensive maneuvers, hazard prevention, and specialty protocols used by professional chauffeurs.
             </p>
-          </Reveal>
+          </Reveal3D>
 
-          <Reveal delay={0.12}>
+          <Reveal3D delay={0.12}>
             <div style={{ borderTop: "2px solid currentColor", paddingTop: "1rem", marginTop: "1.5rem" }}>
               <a href="#plans" className="hover-invert" style={{
                 display: "inline-flex", alignItems: "center", gap: "0.4rem",
@@ -75,7 +75,7 @@ export function WhyChoose() {
                 Learn More <ArrowRight size={14} />
               </a>
             </div>
-          </Reveal>
+          </Reveal3D>
         </motion.div>
 
         {/* Cell 2 – yellow: Flexible Slots */}
@@ -85,7 +85,7 @@ export function WhyChoose() {
           transition={{ duration: 0.22 }}
           style={{ borderBottom: "2px solid var(--ink)", display: "flex", alignItems: "flex-start", gap: "1rem" }}
         >
-          <Reveal delay={0.1} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+          <Reveal3D delay={0.1} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
             <div style={{
               width: 40, height: 40, border: "2px solid var(--ink)",
               display: "flex", alignItems: "center", justifyContent: "center",
@@ -99,7 +99,7 @@ export function WhyChoose() {
                 Morning, late-night, or weekend sessions tailored to your busy lifestyle.
               </p>
             </div>
-          </Reveal>
+          </Reveal3D>
         </motion.div>
 
         {/* Cell 3 – red: Top Fleet */}
@@ -109,7 +109,7 @@ export function WhyChoose() {
           transition={{ duration: 0.22 }}
           style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}
         >
-          <Reveal delay={0.15} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+          <Reveal3D delay={0.15} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
             <div style={{
               width: 40, height: 40, border: "2px solid rgba(255,255,255,0.35)",
               display: "flex", alignItems: "center", justifyContent: "center",
@@ -123,7 +123,7 @@ export function WhyChoose() {
                 Modern dual-control vehicles, perfectly maintained for comfort and safety.
               </p>
             </div>
-          </Reveal>
+          </Reveal3D>
         </motion.div>
 
         {/* Cell 4 – light: Local Pros */}
@@ -133,7 +133,7 @@ export function WhyChoose() {
           transition={{ duration: 0.22 }}
           style={{ background: "#f0f4ff", borderRight: "none", display: "flex", alignItems: "flex-start", gap: "1rem" }}
         >
-          <Reveal delay={0.2} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+          <Reveal3D delay={0.2} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
             <div style={{
               width: 40, height: 40, border: "2px solid var(--ink)",
               display: "flex", alignItems: "center", justifyContent: "center",
@@ -147,7 +147,7 @@ export function WhyChoose() {
                 RTO-aware instructors who know the roads, test routes, and common mistakes to avoid.
               </p>
             </div>
-          </Reveal>
+          </Reveal3D>
         </motion.div>
       </div>
     </section>

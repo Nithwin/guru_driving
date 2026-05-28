@@ -60,51 +60,41 @@ export function HeroSection() {
         </Reveal>
 
         {/* Headline */}
-        <div style={{ overflow: "hidden" }}>
+        <div style={{ overflow: "visible" }}>
           <h1 style={{
-            fontSize: "clamp(2.4rem, 5.5vw, 4.2rem)",
+            fontSize: "clamp(3rem, 7vw, 6.5rem)",
             fontWeight: 900,
-            lineHeight: 1.02,
-            letterSpacing: "-0.025em",
+            lineHeight: 0.95,
+            letterSpacing: "-0.04em",
             textTransform: "uppercase",
             color: "var(--ink)",
-            maxWidth: 520,
+            maxWidth: 620,
           }}>
-            <motion.span
-              style={{ display: "block", overflow: "hidden" }}
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.15, duration: 0.75, ease: EASE }}
-            >
-              Master the Road
-            </motion.span>
-            <motion.span
-              style={{ display: "block", overflow: "hidden" }}
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.25, duration: 0.75, ease: EASE }}
-            >
-              with{" "}
+            <RevealText text="MASTER" delay={0.15} style={{ display: "block" }} />
+            <RevealText text="THE ROAD" delay={0.35} style={{ display: "block" }} />
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <RevealText text="WITH" delay={0.55} style={{ marginRight: "0.3em" }} />
               <span style={{ color: "var(--accent)", position: "relative", display: "inline-block" }}>
-                Precision.
+                <RevealText text="PRECISION." delay={0.65} />
                 {/* Underline accent */}
                 <motion.span
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.7, duration: 0.55, ease: EASE }}
+                  transition={{ delay: 1.2, duration: 0.55, ease: EASE }}
                   style={{
                     position: "absolute",
-                    bottom: -4,
+                    bottom: "-0.1em",
                     left: 0,
                     right: 0,
-                    height: 4,
+                    height: "0.12em",
                     background: "var(--yellow)",
                     transformOrigin: "left",
                     display: "block",
+                    zIndex: -1
                   }}
                 />
               </span>
-            </motion.span>
+            </div>
           </h1>
         </div>
 
