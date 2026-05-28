@@ -35,9 +35,19 @@ function CarMesh() {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y += 0.003;
-    // subtle float (+/- 2cm)
-    groupRef.current.position.y += Math.sin(clock.getElapsedTime() * 0.7) * 0.0007;
+    
+    // Auto-spin base
+    const baseRotation = clock.getElapsedTime() * 0.15;
+    
+    // Scroll-linked rotation (interactive feel)
+    const scrollY = window.scrollY || 0;
+    const scrollRotation = scrollY * 0.002;
+    
+    // Combine base auto-spin with user scroll velocity
+    groupRef.current.rotation.y = -Math.PI / 5 + baseRotation + scrollRotation;
+    
+    // Subtle float (+/- 2cm)
+    groupRef.current.position.y += Math.sin(clock.getElapsedTime() * 1.5) * 0.001;
   });
 
   // Start with a 3/4 front-right view

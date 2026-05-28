@@ -1,11 +1,28 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./Animations";
 
 export function FleetShowcase() {
+  const fleetRef = useRef<HTMLDivElement>(null);
+  const roadRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress: fleetScroll } = useScroll({
+    target: fleetRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const { scrollYProgress: roadScroll } = useScroll({
+    target: roadRef,
+    offset: ["start end", "end start"]
+  });
+
+  const fleetY = useTransform(fleetScroll, [0, 1], ["-12%", "12%"]);
+  const roadY = useTransform(roadScroll, [0, 1], ["-15%", "15%"]);
+
   return (
     <>
       {/* ════ FLEET SHOWCASE ════ */}
@@ -21,8 +38,10 @@ export function FleetShowcase() {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div style={{ position: "relative", height: 380, borderRadius: 6, overflow: "hidden", border: "2px solid var(--ink)" }}>
-            <Image src="/fleet.png" alt="Sri Guru training fleet" fill sizes="100vw" style={{ objectFit: "cover" }} />
+          <div ref={fleetRef} style={{ position: "relative", height: 380, borderRadius: 6, overflow: "hidden", border: "2px solid var(--ink)" }}>
+            <motion.div style={{ position: "absolute", inset: "-15%", y: fleetY }}>
+              <Image src="/fleet.png" alt="Sri Guru training fleet" fill sizes="100vw" style={{ objectFit: "cover" }} />
+            </motion.div>
             {/* Overlay gradient */}
             <div style={{
               position: "absolute", inset: 0,
@@ -46,11 +65,13 @@ export function FleetShowcase() {
 
       {/* ════ FULL-WIDTH ROAD IMAGE ════ */}
       <Reveal style={{ marginTop: "4rem" }}>
-        <div style={{
+        <div ref={roadRef} style={{
           position: "relative", height: 260, borderRadius: 6,
           overflow: "hidden", border: "2px solid var(--ink)",
         }}>
-          <Image src="/road-aerial.png" alt="Scenic road" fill sizes="100vw" style={{ objectFit: "cover" }} />
+          <motion.div style={{ position: "absolute", inset: "-15%", y: roadY }}>
+            <Image src="/road-aerial.png" alt="Scenic road" fill sizes="100vw" style={{ objectFit: "cover" }} />
+          </motion.div>
           <div style={{
             position: "absolute", inset: 0,
             background: "rgba(13,13,13,0.55)",

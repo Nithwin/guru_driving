@@ -1,9 +1,20 @@
 "use client";
 
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Reveal } from "./Animations";
 
 export function InstructorPhilosophy() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
+
   return (
     <section style={{ marginTop: "4rem" }}>
       <Reveal>
@@ -13,8 +24,10 @@ export function InstructorPhilosophy() {
           gap: "1.5rem",
           alignItems: "center",
         }} className="instructor-grid">
-          <div style={{ position: "relative", height: 360, borderRadius: 6, overflow: "hidden", border: "2px solid var(--ink)" }}>
-            <Image src="/instructor.png" alt="Instructor teaching student" fill sizes="(max-width:768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
+          <div ref={containerRef} style={{ position: "relative", height: 360, borderRadius: 6, overflow: "hidden", border: "2px solid var(--ink)" }}>
+            <motion.div style={{ position: "absolute", inset: "-15%", y: imageY }}>
+              <Image src="/instructor.png" alt="Instructor teaching student" fill sizes="(max-width:768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
+            </motion.div>
           </div>
           <div style={{ padding: "1rem 0" }}>
             <p className="eyebrow" style={{ marginBottom: "0.6rem" }}>Our Philosophy</p>
