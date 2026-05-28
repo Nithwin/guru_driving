@@ -8,11 +8,11 @@ export function WhyChoose() {
   return (
     <section style={{ marginTop: "5rem" }}>
       <Reveal3D>
-        <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>Why Choose Sri Guru</p>
+        <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>Why Learn With Us</p>
         <h2 className="section-title">
-          Built for Confidence,
+          No Yelling, No Stress.
           <br />
-          Speed, & <span className="accent">Safe Progress.</span>
+          Just <span className="accent">Safe Driving.</span>
         </h2>
         <div style={{ width: 48, height: 3, background: "var(--accent)", marginTop: "0.75rem" }} />
       </Reveal3D>

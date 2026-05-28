@@ -13,9 +13,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Sri Guru Driving School",
+    "description": "Premium, friendly driving education in the city. Dual-control vehicles and certified instructors.",
+    "url": "https://srigurudriving.com",
+    "telephone": "+919000000000",
+    "openingHours": "Mo-Su 06:00-20:00"
+  };
+
   return (
     <html lang="en" className="h-full">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

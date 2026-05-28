@@ -30,13 +30,13 @@ export function InstructorPhilosophy() {
             </motion.div>
           </div>
           <div style={{ padding: "1rem 0" }}>
-            <p className="eyebrow" style={{ marginBottom: "0.6rem" }}>Our Philosophy</p>
+            <p className="eyebrow" style={{ marginBottom: "0.6rem" }}>Our Promise</p>
             <h2 className="section-title" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>
-              We Don't Just Teach Driving. <br />
-              <span className="accent">We Build Drivers.</span>
+              We're Here to Help You <br />
+              <span className="accent">Love Driving.</span>
             </h2>
             <p style={{ fontSize: "0.9rem", lineHeight: 1.9, color: "var(--muted)", marginTop: "1rem", maxWidth: 400 }}>
-              Every lesson at Sri Guru is crafted to build real confidence — not just test-passing technique. Our instructors are patient, RTO-certified, and dedicated to your long-term safety on the road.
+              Learning to drive shouldn't be scary. Our local, certified instructors sit right beside you with dual controls, ensuring you are 100% safe while you learn at your own pace.
             </p>
             <div style={{ marginTop: "1.5rem", display: "flex", gap: "1.5rem" }}>
               {[["12+", "Years Experience"], ["5000+", "Graduates"], ["100%", "Dual-Control"]].map(([n, l]) => (

@@ -62,23 +62,22 @@ export function HeroSection() {
         {/* Headline */}
         <div style={{ overflow: "visible" }}>
           <h1 style={{
-            fontSize: "clamp(2.8rem, 6vw, 5.5rem)",
+            fontSize: "clamp(2rem, 4.5vw, 4rem)",
             fontWeight: 900,
-            lineHeight: 0.98,
-            letterSpacing: "-0.03em",
+            lineHeight: 1.05,
+            letterSpacing: "-0.02em",
             textTransform: "uppercase",
             color: "var(--ink)",
-            maxWidth: 580,
+            maxWidth: 680,
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
           }}>
-            <RevealText text="MASTER" delay={0.15} style={{ display: "block" }} />
-            <RevealText text="THE ROAD" delay={0.35} style={{ display: "block" }} />
+            <RevealText text="LEARN TO" delay={0.15} style={{ display: "block" }} />
+            <RevealText text="DRIVE WITH" delay={0.35} style={{ display: "block" }} />
             <div style={{ display: "inline-block", marginTop: "0.1em", wordWrap: "break-word", whiteSpace: "normal" }}>
-              <RevealText text="WITH" delay={0.55} style={{ marginRight: "0.25em", display: "inline-block" }} />
               <span style={{ color: "var(--accent)", position: "relative", display: "inline-block" }}>
-                <RevealText text="PRECISION." delay={0.65} style={{ display: "inline-block" }} />
+                <RevealText text="CONFIDENCE." delay={0.65} style={{ display: "inline-block" }} />
                 {/* Underline accent */}
                 <motion.span
                   initial={{ scaleX: 0 }}
@@ -104,8 +103,7 @@ export function HeroSection() {
         {/* Subtext */}
         <Reveal delay={0.4} y={20}>
           <p style={{ fontSize: "0.95rem", lineHeight: 1.85, color: "var(--muted)", maxWidth: 430 }}>
-            Premium driving education where safety meets high-performance instruction.
-            From first-time steering to professional maneuvers, we drive excellence.
+            We know getting behind the wheel can feel overwhelming. Our friendly, patient instructors are here to help you feel safe, relaxed, and ready for the road.
           </p>
         </Reveal>
 
