@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 import { ScaleIn } from "./Animations";
+import { Users, Award, Headphones, CheckSquare } from "lucide-react";
 
 function CountUp({ target, suffix = "" }: { target: number | string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -33,27 +34,40 @@ function CountUp({ target, suffix = "" }: { target: number | string; suffix?: st
 }
 
 const stats = [
-  { value: 5000, suffix: "+", label: "Students Passed" },
-  { value: 15, suffix: "+", label: "Expert Trainers" },
-  { value: "24/7", suffix: "", label: "Online Support" },
-  { value: 100, suffix: "%", label: "Pass Guarantee" },
+  { value: 5000, suffix: "+", label: "Students Passed", icon: Users },
+  { value: 15, suffix: "+", label: "Expert Trainers", icon: Award },
+  { value: "24/7", suffix: "", label: "Online Support", icon: Headphones },
+  { value: 100, suffix: "%", label: "Pass Guarantee", icon: CheckSquare },
 ];
 
 export function StatsSection() {
   return (
-    <section className="stats-section" style={{ marginTop: "4rem" }}>
+    <section className="stats-section" style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}>
       <div className="container">
         <div className="stats-grid">
-          {stats.map((s, i) => (
-            <ScaleIn key={s.label} delay={i * 0.1}>
-              <div className="stat-item">
-                <span className="stat-value">
-                  <CountUp target={s.value as number} suffix={s.suffix} />
-                </span>
-                <span className="stat-label">{s.label}</span>
-              </div>
-            </ScaleIn>
-          ))}
+          {stats.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <ScaleIn key={s.label} delay={i * 0.1}>
+                <div className="stat-item">
+                  <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginBottom: "0.5rem",
+                  }}>
+                    <Icon
+                      size={20}
+                      style={{ color: "var(--ink)", opacity: 0.3 }}
+                    />
+                  </div>
+                  <span className="stat-value">
+                    <CountUp target={s.value as number} suffix={s.suffix} />
+                  </span>
+                  <span className="stat-label">{s.label}</span>
+                </div>
+              </ScaleIn>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 /* ══════════════════════════════════════════════════
    SRI GURU DRIVING SCHOOL — Award-Winning CSS
+   Premium & Fully Responsive
    ══════════════════════════════════════════════════ */
 
 /* ── Design Tokens ── */
@@ -24,7 +25,12 @@
   --border: #e5e7eb;
   --border-dark: #111827;
   --radius: 4px;
+  --radius-lg: 10px;
   --ease: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* Spacing scale */
+  --section-gap: clamp(3rem, 6vw, 5rem);
+  --container-px: clamp(1rem, 4vw, 1.5rem);
 }
 
 @theme inline {
@@ -44,6 +50,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
 
 body {
@@ -93,16 +101,16 @@ body {
   opacity: 0;
 }
 
-/* hide cursor on mobile */
+/* hide cursor on touch devices */
 @media (hover: none) {
   body { cursor: auto; }
   .custom-cursor, .custom-cursor-ring { display: none; }
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 /* ── Noise Texture Overlay ── */
@@ -121,12 +129,13 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 var(--container-px);
+  width: 100%;
 }
 
 /* ══ Typography ══ */
 .eyebrow {
-  font-size: 0.68rem;
+  font-size: clamp(0.6rem, 1.5vw, 0.72rem);
   font-weight: 800;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -139,15 +148,16 @@ body {
 .eyebrow::before {
   content: "";
   display: block;
-  width: 16px;
+  width: 14px;
   height: 1.5px;
   background: var(--accent);
+  flex-shrink: 0;
 }
 
 .section-title {
-  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-size: clamp(1.65rem, 4vw, 3rem);
   font-weight: 900;
-  line-height: 1.04;
+  line-height: 1.05;
   letter-spacing: -0.025em;
   text-transform: uppercase;
   color: var(--ink);
@@ -163,20 +173,20 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .site-header:hover {
-  border-bottom-color: var(--accent);
+  border-bottom-color: rgba(204,0,51,0.3);
 }
 
 /* ── Nav link ── */
 .nav-link {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-decoration: none;
   color: var(--muted);
@@ -185,6 +195,7 @@ body {
   padding-bottom: 3px;
   transition: color 0.2s var(--ease);
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .nav-link::after {
@@ -207,9 +218,9 @@ body {
 .hero-section {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 2.5rem;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
   align-items: center;
-  padding: 4rem 0 3rem;
+  padding: clamp(2rem, 5vw, 4rem) 0 clamp(2rem, 4vw, 3rem);
 }
 
 /* ══ Marquee Ticker ══ */
@@ -220,23 +231,23 @@ body {
   border-bottom: 2px solid var(--ink);
   background: var(--yellow);
   color: var(--ink);
-  padding: 0.85rem 0;
+  padding: 0.75rem 0;
 }
 
 .marquee-inner {
   display: inline-flex;
-  gap: 3rem;
+  gap: 2.5rem;
   animation: marquee 22s linear infinite;
 }
 
 .marquee-inner span {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
 .marquee-inner .dot {
@@ -260,7 +271,7 @@ body {
 }
 
 .feature-cell {
-  padding: 2rem 1.75rem;
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 2.5vw, 1.75rem);
   border-right: 2px solid var(--ink);
   border-bottom: 2px solid var(--ink);
   position: relative;
@@ -280,7 +291,7 @@ body {
 .stats-section {
   background: var(--yellow);
   color: var(--ink);
-  padding: 3.5rem 0;
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
   position: relative;
   overflow: hidden;
 }
@@ -305,7 +316,7 @@ body {
 }
 
 .stat-item {
-  padding: 1.5rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
   text-align: center;
   border-right: 1px solid rgba(0,0,0,0.1);
   position: relative;
@@ -314,7 +325,7 @@ body {
 .stat-item:last-child { border-right: none; }
 
 .stat-value {
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-size: clamp(1.9rem, 4.5vw, 3.2rem);
   font-weight: 900;
   color: var(--ink);
   line-height: 1;
@@ -324,12 +335,12 @@ body {
 
 .stat-label {
   display: block;
-  font-size: 0.6rem;
+  font-size: clamp(0.55rem, 1.2vw, 0.62rem);
   font-weight: 700;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.5);
-  margin-top: 0.6rem;
+  margin-top: 0.5rem;
 }
 
 /* ══ Pricing ══ */
@@ -398,7 +409,7 @@ body {
   background: var(--bg);
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.25rem;
+  padding: clamp(1rem, 2.5vw, 1.25rem);
   transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
@@ -438,38 +449,183 @@ body {
   border: 0;
 }
 
-/* ══ Responsive ══ */
+/* ══ Tailwind display utilities ══ */
 .hidden { display: none !important; }
 
 @media (min-width: 640px) {
   .sm\:inline-flex { display: inline-flex !important; }
+  .sm\:block { display: block !important; }
 }
 
 @media (min-width: 768px) {
   .md\:flex { display: flex !important; }
   .md\:hidden { display: none !important; }
+  .md\:block { display: block !important; }
 }
 
+@media (min-width: 1024px) {
+  .lg\:flex { display: flex !important; }
+  .lg\:hidden { display: none !important; }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ══════════════════════════════════════ */
+
+/* ── Tablet (≤1024px) ── */
 @media (max-width: 1024px) {
-  .plans-grid { grid-template-columns: 1fr 1fr; }
+  .plans-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
   .plan-card.featured { transform: none; }
+  .plan-card.featured:hover { transform: translateY(-6px); }
+
+  /* Hero: reduce right-side canvas on tablet */
+  .hero-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
 }
 
+/* ── Large Mobile / Small Tablet (≤768px) ── */
 @media (max-width: 768px) {
-  .hero-section { grid-template-columns: 1fr; padding: 2.5rem 0; }
+  /* Hero stacks */
+  .hero-section {
+    grid-template-columns: 1fr;
+    padding: 2rem 0 1.5rem;
+    gap: 0;
+  }
+
+  /* Features grid single column */
   .features-grid { grid-template-columns: 1fr; }
   .feature-cell { border-right: none !important; }
   .feature-cell:last-child { border-bottom: none; }
-  .plans-grid { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Feature cell: remove span on mobile */
+  .feature-cell[style*="grid-row"] {
+    grid-row: span 1 !important;
+    min-height: auto !important;
+  }
+
+  /* Plans: single col */
+  .plans-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Stats: 2×2 grid */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .stat-item:nth-child(2) { border-right: none; }
   .stat-item:nth-child(3) { border-right: 1px solid rgba(0,0,0,0.1); }
+
+  /* Reviews & FAQ grid: stack */
   .reviews-faq-grid { grid-template-columns: 1fr !important; }
-  .cta-inner-grid { grid-template-columns: 1fr !important; }
+
+  /* CTA inner grid: stack */
+  .cta-inner-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+  /* Hero right panel: show compactly */
+  .hero-right-panel {
+    min-height: 320px !important;
+  }
+
+  /* Hero floating badges: reposition for mobile */
+  .hero-stat-left {
+    left: 0 !important;
+    bottom: 22% !important;
+  }
+  .hero-stat-right {
+    right: 0 !important;
+    top: 10% !important;
+  }
+
+  /* Section spacing */
+  .section-gap-top { margin-top: clamp(2.5rem, 6vw, 4rem) !important; }
 }
 
+/* ── Small Mobile (≤480px) ── */
 @media (max-width: 480px) {
-  .hero-section { padding: 1.5rem 0; }
+  .hero-section { padding: 1.25rem 0 1rem; }
+
   .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-item { padding: 1rem 0.75rem; }
+
   .plans-grid { grid-template-columns: 1fr; }
+
+  /* Smaller hero heading on very small screens */
+  h1 { font-size: clamp(1.75rem, 8vw, 2.5rem) !important; }
+
+  /* Section title on tiny screens */
+  .section-title { font-size: clamp(1.4rem, 7vw, 2rem); }
+
+  /* Fleet features grid: 2 cols on mobile */
+  .fleet-features-grid { grid-template-columns: 1fr 1fr !important; }
+
+  /* Hide decorative vertical stripe */
+  .hero-deco-stripe { display: none !important; }
+
+  /* Preloader corner elements */
+  .preloader-corner { display: none !important; }
+}
+
+/* ── Very small screens (≤360px) ── */
+@media (max-width: 360px) {
+  :root { --container-px: 0.85rem; }
+  .hero-section { padding: 1rem 0; }
+  .plan-card { border-width: 1.5px; }
+}
+
+/* ══ Premium Glass Utility ══ */
+.glass {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.glass-dark {
+  background: rgba(15,15,15,0.75);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ══ Premium Gradient Text ══ */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, #ff4d6d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ══ Shimmer Button Effect ══ */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s var(--ease);
+}
+
+.btn-shimmer:hover::after {
+  left: 150%;
+}
+
+/* ══ Premium Input Focus ══ */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-glow);
 }
