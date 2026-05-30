@@ -35,19 +35,17 @@ export function WhyChoose() {
             cursor: "default",
           }}
           onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-            const el = e.currentTarget;
-            el.querySelectorAll<HTMLElement>(".hover-invert").forEach(n => {
+            e.currentTarget.querySelectorAll<HTMLElement>(".hover-invert").forEach(n => {
               n.style.color = "var(--yellow-ink)";
             });
           }}
           onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
-            const el = e.currentTarget;
-            el.querySelectorAll<HTMLElement>(".hover-invert").forEach(n => {
+            e.currentTarget.querySelectorAll<HTMLElement>(".hover-invert").forEach(n => {
               n.style.color = "";
             });
           }}
         >
-          <Reveal3D delay={0.05}>
+          <div>
             <div style={{
               width: 44, height: 44,
               border: "2px solid var(--ink)",
@@ -76,20 +74,18 @@ export function WhyChoose() {
             }}>
               Beyond the basics — defensive maneuvers, hazard prevention, and specialty protocols used by professional chauffeurs.
             </p>
-          </Reveal3D>
+          </div>
 
-          <Reveal3D delay={0.12}>
-            <div style={{ borderTop: "2px solid currentColor", paddingTop: "1rem", marginTop: "1.5rem" }}>
-              <a href="#plans" className="hover-invert" style={{
-                display: "inline-flex", alignItems: "center", gap: "0.4rem",
-                fontSize: "0.75rem", fontWeight: 800, letterSpacing: "0.1em",
-                textTransform: "uppercase", textDecoration: "none", color: "inherit",
-                transition: "color 0.3s",
-              }}>
-                Learn More <ArrowRight size={13} />
-              </a>
-            </div>
-          </Reveal3D>
+          <div style={{ borderTop: "2px solid currentColor", paddingTop: "1rem", marginTop: "1.5rem" }}>
+            <a href="#plans" className="hover-invert" style={{
+              display: "inline-flex", alignItems: "center", gap: "0.4rem",
+              fontSize: "0.75rem", fontWeight: 800, letterSpacing: "0.1em",
+              textTransform: "uppercase", textDecoration: "none", color: "inherit",
+              transition: "color 0.3s",
+            }}>
+              Learn More <ArrowRight size={13} />
+            </a>
+          </div>
         </motion.div>
 
         {/* Cell 2 – yellow: Flexible Slots */}
@@ -99,26 +95,22 @@ export function WhyChoose() {
           transition={{ duration: 0.22 }}
           style={{ borderBottom: "2px solid var(--ink)", display: "flex", alignItems: "flex-start", gap: "1rem" }}
         >
-          <Reveal3D delay={0.1} style={{ display: "flex", gap: "1rem", alignItems: "flex-start", width: "100%" }}>
-            <div style={{
-              width: 40, height: 40, border: "2px solid var(--ink)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              background: "#fff", color: "var(--accent)", flexShrink: 0,
-            }}>
-              <Clock3 size={18} />
-            </div>
-            <div>
-              <h3 style={{
-                fontSize: "clamp(0.9rem, 2vw, 1rem)",
-                fontWeight: 900,
-                textTransform: "uppercase",
-                marginBottom: "0.35rem",
-              }}>Flexible Slots</h3>
-              <p style={{ fontSize: "clamp(0.76rem, 1.7vw, 0.82rem)", lineHeight: 1.75, color: "var(--yellow-ink)" }}>
-                Morning, late-night, or weekend sessions tailored to your busy lifestyle.
-              </p>
-            </div>
-          </Reveal3D>
+          <div style={{
+            width: 40, height: 40, border: "2px solid var(--ink)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            background: "#fff", color: "var(--accent)", flexShrink: 0,
+          }}>
+            <Clock3 size={18} />
+          </div>
+          <div>
+            <h3 style={{
+              fontSize: "clamp(0.9rem, 2vw, 1rem)",
+              fontWeight: 900, textTransform: "uppercase", marginBottom: "0.35rem",
+            }}>Flexible Slots</h3>
+            <p style={{ fontSize: "clamp(0.76rem, 1.7vw, 0.82rem)", lineHeight: 1.75, color: "var(--yellow-ink)" }}>
+              Morning, late-night, or weekend sessions tailored to your busy lifestyle.
+            </p>
+          </div>
         </motion.div>
 
         {/* Cell 3 – red: Top Fleet */}
@@ -128,26 +120,22 @@ export function WhyChoose() {
           transition={{ duration: 0.22 }}
           style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}
         >
-          <Reveal3D delay={0.15} style={{ display: "flex", gap: "1rem", alignItems: "flex-start", width: "100%" }}>
-            <div style={{
-              width: 40, height: 40, border: "2px solid rgba(255,255,255,0.35)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              background: "rgba(255,255,255,0.12)", color: "#fff", flexShrink: 0,
-            }}>
-              <CarFront size={18} />
-            </div>
-            <div>
-              <h3 style={{
-                fontSize: "clamp(0.9rem, 2vw, 1rem)",
-                fontWeight: 900,
-                textTransform: "uppercase",
-                marginBottom: "0.35rem",
-              }}>Top Fleet</h3>
-              <p style={{ fontSize: "clamp(0.76rem, 1.7vw, 0.82rem)", lineHeight: 1.75, color: "rgba(255,255,255,0.8)" }}>
-                Modern dual-control vehicles, perfectly maintained for comfort and safety.
-              </p>
-            </div>
-          </Reveal3D>
+          <div style={{
+            width: 40, height: 40, border: "2px solid rgba(255,255,255,0.35)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            background: "rgba(255,255,255,0.12)", color: "#fff", flexShrink: 0,
+          }}>
+            <CarFront size={18} />
+          </div>
+          <div>
+            <h3 style={{
+              fontSize: "clamp(0.9rem, 2vw, 1rem)",
+              fontWeight: 900, textTransform: "uppercase", marginBottom: "0.35rem",
+            }}>Top Fleet</h3>
+            <p style={{ fontSize: "clamp(0.76rem, 1.7vw, 0.82rem)", lineHeight: 1.75, color: "rgba(255,255,255,0.8)" }}>
+              Modern dual-control vehicles, perfectly maintained for comfort and safety.
+            </p>
+          </div>
         </motion.div>
 
         {/* Cell 4 – light: Local Pros */}
@@ -164,30 +152,25 @@ export function WhyChoose() {
             gap: "1rem",
           }}
         >
-          <Reveal3D delay={0.2} style={{ display: "flex", gap: "1rem", alignItems: "flex-start", width: "100%" }}>
-            <div style={{
-              width: 40, height: 40, border: "2px solid var(--ink)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              background: "#fff", color: "var(--accent)", flexShrink: 0,
-            }}>
-              <BadgeCheck size={18} />
-            </div>
-            <div>
-              <h3 style={{
-                fontSize: "clamp(0.9rem, 2vw, 1rem)",
-                fontWeight: 900,
-                textTransform: "uppercase",
-                marginBottom: "0.35rem",
-              }}>Local Pros</h3>
-              <p style={{ fontSize: "clamp(0.76rem, 1.7vw, 0.82rem)", lineHeight: 1.75, color: "var(--muted)" }}>
-                RTO-aware instructors who know the roads, test routes, and common mistakes to avoid.
-              </p>
-            </div>
-          </Reveal3D>
+          <div style={{
+            width: 40, height: 40, border: "2px solid var(--ink)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            background: "#fff", color: "var(--accent)", flexShrink: 0,
+          }}>
+            <BadgeCheck size={18} />
+          </div>
+          <div>
+            <h3 style={{
+              fontSize: "clamp(0.9rem, 2vw, 1rem)",
+              fontWeight: 900, textTransform: "uppercase", marginBottom: "0.35rem",
+            }}>Local Pros</h3>
+            <p style={{ fontSize: "clamp(0.76rem, 1.7vw, 0.82rem)", lineHeight: 1.75, color: "var(--muted)" }}>
+              RTO-aware instructors who know the roads, test routes, and common mistakes to avoid.
+            </p>
+          </div>
         </motion.div>
       </div>
 
-      {/* On mobile, remove grid-row span via inline style reset */}
       <style>{`
         @media (max-width: 768px) {
           .features-grid > div:first-child {

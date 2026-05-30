@@ -1,0 +1,2 @@
+# Exclude root-level car.glb duplicate (the one in /public is the correct one)
+/car.glb

@@ -13,20 +13,39 @@ const CarScene = dynamic(() => import("./CarScene").then((m) => ({ default: m.Ca
       width: "100%",
       background: "linear-gradient(135deg,#f5c800 0%,#e6b800 100%)",
       display: "flex",
+      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      gap: "1.25rem",
     }}>
-      <div style={{
-        width: 36, height: 36,
-        border: "3px solid rgba(255,255,255,0.1)",
-        borderTopColor: "var(--accent)",
-        borderRadius: "50%",
-        animation: "spin 0.8s linear infinite",
-      }} />
+      <svg width="120" height="60" viewBox="0 0 120 60" fill="none" style={{ opacity: 0.35 }}>
+        <rect x="10" y="28" width="100" height="20" rx="4" fill="#0d0d0d" />
+        <path d="M25 28 C30 12 40 8 60 8 C80 8 90 12 95 28 Z" fill="#0d0d0d" />
+        <circle cx="30" cy="50" r="9" fill="#0d0d0d" />
+        <circle cx="90" cy="50" r="9" fill="#0d0d0d" />
+        <circle cx="30" cy="50" r="5" fill="#f5c800" />
+        <circle cx="90" cy="50" r="5" fill="#f5c800" />
+      </svg>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <div style={{
+          width: 18, height: 18,
+          border: "2.5px solid rgba(0,0,0,0.12)",
+          borderTopColor: "#cc0033",
+          borderRadius: "50%",
+          animation: "spin 0.8s linear infinite",
+          flexShrink: 0,
+        }} />
+        <span style={{
+          fontSize: "0.58rem", fontWeight: 800,
+          letterSpacing: "0.2em", textTransform: "uppercase",
+          color: "rgba(0,0,0,0.45)",
+        }}>Loading 3D Model...</span>
+      </div>
       <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
     </div>
   ),
 });
+
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 

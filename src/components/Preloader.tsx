@@ -4,39 +4,73 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-const EASE = [0.83, 0, 0.17, 1] as const; // Very snappy cinematic curve
-const DURATION = 2400; // slightly longer for more drama
+const EASE = [0.83, 0, 0.17, 1] as const;
+const DURATION = 2400;
+// Max extra time to wait for 3D model after animation finishes (ms)
+const MODEL_TIMEOUT = 12000;
 
 export function Preloader({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
   const [done, setDone] = useState(false);
   const rafRef = useRef<number | null>(null);
   const startRef = useRef<number | null>(null);
+  // Track whether both gates are open before dismissing
+  const animDoneRef = useRef(false);
+  const modelReadyRef = useRef(false);
+  const dismissedRef = useRef(false);
+
+  const tryDismiss = () => {
+    if (dismissedRef.current) return;
+    if (!animDoneRef.current || !modelReadyRef.current) return;
+    dismissedRef.current = true;
+    setDone(true);
+    setTimeout(onComplete, 1200); // Wait for exit animation
+  };
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+
+    // Gate 1: listen for the 3D model load event
+    const onModelLoaded = () => {
+      modelReadyRef.current = true;
+      tryDismiss();
+    };
+    window.addEventListener("car-model-loaded", onModelLoaded, { once: true });
+
+    // Safety cap — never wait more than MODEL_TIMEOUT ms for the model
+    const safetyTimer = setTimeout(() => {
+      modelReadyRef.current = true;
+      tryDismiss();
+    }, MODEL_TIMEOUT);
+
+    // Gate 2: run the progress bar animation
     const animate = (ts: number) => {
       if (!startRef.current) startRef.current = ts;
       const elapsed = ts - startRef.current;
-      
-      // Custom easing for progress counting
       const raw = Math.min(elapsed / DURATION, 1);
       const eased = raw < 0.5 ? 4 * raw * raw * raw : 1 - Math.pow(-2 * raw + 2, 3) / 2;
-      
       setProgress(Math.round(eased * 100));
-      
+
       if (raw < 1) {
         rafRef.current = requestAnimationFrame(animate);
       } else {
+        // Brief pause at 100%
         setTimeout(() => {
-          setDone(true);
-          setTimeout(onComplete, 1200); // Wait for exit animation to finish
-        }, 400); // Brief pause at 100%
+          animDoneRef.current = true;
+          tryDismiss();
+        }, 400);
       }
     };
     rafRef.current = requestAnimationFrame(animate);
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      clearTimeout(safetyTimer);
+      window.removeEventListener("car-model-loaded", onModelLoaded);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onComplete]);
+
 
   return (
     <AnimatePresence>
@@ -157,7 +191,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
                     textTransform: "uppercase",
                   }}
                 >
-                  {progress < 40 ? "IGNITING ENGINE..." : progress < 80 ? "CHECKING MIRRORS..." : "READY TO DRIVE"}
+                  {progress < 40 ? "IGNITING ENGINE..." : progress < 80 ? "CHECKING MIRRORS..." : progress < 100 ? "READY TO DRIVE" : "LOADING 3D MODEL..."}
                 </motion.p>
               </div>
 

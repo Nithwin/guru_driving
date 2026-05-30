@@ -6,6 +6,14 @@ export const metadata: Metadata = {
   description:
     "Premium driving education in the heart of the city. Safety-focused, RTO-certified, and trusted by 5000+ graduates. Book your first lesson today.",
   keywords: "driving school, learn to drive, RTO, driving lessons, beginner driving, Sri Guru",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo-icon.png", type: "image/png", sizes: "256x256" },
+    ],
+    apple: { url: "/logo-icon.png", sizes: "180x180" },
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
