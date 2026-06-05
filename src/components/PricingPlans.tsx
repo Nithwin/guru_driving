@@ -7,54 +7,48 @@ import { Reveal } from "./Animations";
 const plans = [
   {
     badge: "Starter",
-    name: "Beginner",
-    price: "₹9,500",
-    duration: "1 hr / session",
-    distance: "50 km total",
-    weeks: "4 weeks",
-    sessions: 12,
+    name: "Standard",
+    price: "₹6,500",
+    duration: "5 km",
+    distance: "75 km",
+    weeks: "15 Days",
+    sessions: 15,
     features: [
-      "12 Sessions (1 hr each)",
-      "50 km covered in total",
+      "15 Sessions (5 km each)",
       "Basic road rules & signals",
       "Parking & slow maneuvers",
-      "Theory materials included",
+      "License support & escort",
     ],
     tone: "neutral" as const,
   },
   {
     badge: "Most Popular",
-    name: "Medium",
-    price: "₹15,000",
-    duration: "1.5 hrs / session",
-    distance: "120 km total",
-    weeks: "6 weeks",
-    sessions: 18,
+    name: "Premium",
+    price: "₹9,000",
+    duration: "5 km",
+    distance: "100 km",
+    weeks: "20 Days",
+    sessions: 20,
     features: [
-      "18 Sessions (1.5 hrs each)",
-      "120 km covered in total",
+      "20 Sessions (5 km each)",
       "Highway & city driving",
       "Defensive driving basics",
-      "Night driving session",
-      "Mock RTO test included",
+      "License support & escort",
     ],
     tone: "featured" as const,
   },
   {
     badge: "Pro Level",
-    name: "Advanced",
-    price: "₹22,000",
-    duration: "2 hrs / session",
-    distance: "250 km total",
-    weeks: "8 weeks",
-    sessions: 25,
+    name: "Pro",
+    price: "₹13,000",
+    duration: "5 km",
+    distance: "150 km",
+    weeks: "30 Days",
+    sessions: 30,
     features: [
-      "25 Sessions (2 hrs each)",
-      "250 km covered in total",
+      "30 Sessions (5 km each)",
       "Expressway & ghat roads",
       "Advanced hazard control",
-      "Multiple night drives",
-      "Unlimited mock tests",
       "License support & escort",
     ],
     tone: "yellow" as const,
@@ -94,7 +88,7 @@ export function PricingPlans() {
               transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
               whileHover={
                 featured
-                  ? { translateY: -14, boxShadow: "0 28px 70px rgba(204,0,51,0.4)" }
+                  ? { translateY: -14, boxShadow: "0 28px 70px rgba(0,102,255,0.4)" }
                   : { translateY: -6, boxShadow: "0 16px 40px rgba(0,0,0,0.1)" }
               }
               className={`plan-card${featured ? " featured" : ""}`}
@@ -188,7 +182,7 @@ export function PricingPlans() {
                 }}>
                   {/* Session duration */}
                   <div style={{ textAlign: "center" }}>
-                    <Clock size={13} style={{ color: featured ? "#fff" : "var(--accent)", margin: "0 auto 4px" }} />
+                    <Route size={13} style={{ color: featured ? "#fff" : "var(--accent)", margin: "0 auto 4px" }} />
                     <p style={{
                       fontSize: "clamp(0.55rem, 1.2vw, 0.62rem)",
                       fontWeight: 800,
@@ -230,7 +224,7 @@ export function PricingPlans() {
                       textTransform: "uppercase",
                       letterSpacing: "0.06em",
                       marginTop: 2,
-                    }}>Driving</p>
+                    }}>Total Dist</p>
                   </div>
                   {/* Weeks */}
                   <div style={{ textAlign: "center" }}>
