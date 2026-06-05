@@ -1,264 +1,158 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Clock, Route, Calendar, CheckCircle2, Sparkles } from "lucide-react";
+import { CheckCircle2, Sparkles, ArrowRight } from "lucide-react";
 import { Reveal } from "./Animations";
 
-const plans = [
+const PLANS = [
   {
     badge: "Starter",
     name: "Standard",
     price: "₹6,500",
-    duration: "5 km",
-    distance: "75 km",
-    weeks: "15 Days",
+    days: "15 Days",
     sessions: 15,
-    features: [
-      "15 Sessions (5 km each)",
-      "Basic road rules & signals",
-      "Parking & slow maneuvers",
-      "License support & escort",
-    ],
-    tone: "neutral" as const,
+    km: "5 km / session",
+    features: ["15 Sessions (5 km each)", "Basic road rules & signals", "Parking & slow maneuvers", "License support & escort"],
+    featured: false,
+    isYellow: false,
   },
   {
     badge: "Most Popular",
     name: "Premium",
     price: "₹9,000",
-    duration: "5 km",
-    distance: "100 km",
-    weeks: "20 Days",
+    days: "20 Days",
     sessions: 20,
-    features: [
-      "20 Sessions (5 km each)",
-      "Highway & city driving",
-      "Defensive driving basics",
-      "License support & escort",
-    ],
-    tone: "featured" as const,
+    km: "5 km / session",
+    features: ["20 Sessions (5 km each)", "Highway & city driving", "Defensive driving basics", "License support & escort"],
+    featured: true,
+    isYellow: false,
   },
   {
     badge: "Pro Level",
     name: "Pro",
     price: "₹13,000",
-    duration: "5 km",
-    distance: "150 km",
-    weeks: "30 Days",
+    days: "30 Days",
     sessions: 30,
-    features: [
-      "30 Sessions (5 km each)",
-      "Expressway & ghat roads",
-      "Advanced hazard control",
-      "License support & escort",
-    ],
-    tone: "yellow" as const,
+    km: "5 km / session",
+    features: ["30 Sessions (5 km each)", "Expressway & ghat roads", "Advanced hazard control", "License support & escort"],
+    featured: false,
+    isYellow: true,
   },
 ];
 
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function PricingPlans() {
   return (
-    <section id="plans" style={{ marginTop: "var(--section-gap, 5rem)" }}>
-      <Reveal style={{ textAlign: "center", marginBottom: "clamp(1.75rem, 4vw, 2.5rem)" }}>
-        <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>Training Plans</p>
-        <h2 className="section-title">
-          Pick Your <span className="accent">Level</span>
-        </h2>
-        <p style={{
-          fontSize: "clamp(0.82rem, 1.8vw, 0.88rem)",
-          color: "var(--muted)",
-          marginTop: "0.75rem",
-          maxWidth: 500,
-          margin: "0.75rem auto 0",
-          lineHeight: 1.7,
-        }}>
-          Every plan is designed around real driving distance and time — so you build genuine confidence, not just hours on paper.
-        </p>
-      </Reveal>
+    <section id="plans" style={{ padding: "var(--section-py) 0" }}>
+      <div className="container">
+        <Reveal style={{ textAlign: "center", marginBottom: "clamp(2rem, 4vw, 3.5rem)" }}>
+          <p className="eyebrow" style={{ marginBottom: "0.75rem" }}>Training Plans</p>
+          <h2 className="section-title">
+            Pick Your <span className="gradient-text-blue">Level</span>
+          </h2>
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "clamp(0.85rem, 1.8vw, 0.95rem)",
+            color: "var(--text-muted)",
+            marginTop: "0.85rem",
+            maxWidth: 480,
+            margin: "0.85rem auto 0",
+            lineHeight: 1.7,
+          }}>
+            Every plan includes license support, escort, and doorstep pickup across Mettur & surrounding areas.
+          </p>
+        </Reveal>
 
-      <div className="plans-grid">
-        {plans.map((plan, idx) => {
-          const featured = plan.tone === "featured";
-          return (
-            <motion.article
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.25rem", alignItems: "start" }} className="plans-grid-v2">
+          {PLANS.map((plan, i) => (
+            <motion.div
               key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
+              className={`plan-card${plan.featured ? " featured" : ""}`}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
-              whileHover={
-                featured
-                  ? { translateY: -14, boxShadow: "0 28px 70px rgba(0,102,255,0.4)" }
-                  : { translateY: -6, boxShadow: "0 16px 40px rgba(0,0,0,0.1)" }
-              }
-              className={`plan-card${featured ? " featured" : ""}`}
-              style={{ padding: 0 }}
-            >
-              {/* Featured glow effect */}
-              {featured && (
-                <div style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "radial-gradient(ellipse at top, rgba(255,255,255,0.08) 0%, transparent 60%)",
-                  pointerEvents: "none",
-                  zIndex: 0,
-                  borderRadius: "inherit",
-                }} />
-              )}
-
-              <div style={{
-                padding: "clamp(1.25rem, 3vw, 1.75rem) clamp(1rem, 2.5vw, 1.5rem)",
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: i * 0.12, duration: 0.7, ease: EASE }}
+              style={{
+                background: plan.isYellow ? "var(--yellow)" : plan.featured ? "var(--accent)" : "var(--surface)",
+                border: plan.featured ? "1px solid var(--accent)" : plan.isYellow ? "1px solid rgba(0,0,0,0.08)" : "1px solid var(--border)",
+                borderRadius: 16,
+                overflow: "hidden",
                 position: "relative",
-                zIndex: 1,
-              }}>
+              }}
+            >
+              {/* Top accent bar */}
+              <div style={{
+                height: 3,
+                background: plan.featured ? "var(--yellow)" : plan.isYellow ? "var(--yellow-ink)" : "var(--accent)",
+                opacity: plan.isYellow ? 0.2 : 1,
+              }} />
+
+              <div style={{ padding: "clamp(1.5rem, 3vw, 2.25rem)" }}>
                 {/* Badge */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem" }}>
-                  <span style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.3rem",
-                    padding: "0.22rem 0.65rem",
-                    fontSize: "0.6rem",
-                    fontWeight: 800,
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    background: featured ? "#fff" : "var(--yellow)",
-                    color: featured ? "var(--accent)" : "var(--yellow-ink)",
-                    borderRadius: 2,
-                  }}>
-                    {featured && <Sparkles size={9} />}
-                    {plan.badge}
-                  </span>
-                  {featured && (
-                    <span style={{
-                      fontSize: "0.55rem",
-                      fontWeight: 800,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "rgba(255,255,255,0.6)",
-                    }}>
-                      Best value
-                    </span>
-                  )}
+                <div style={{
+                  display: "inline-flex", alignItems: "center", gap: "0.35rem",
+                  background: plan.featured ? "rgba(255,255,255,0.15)" : plan.isYellow ? "rgba(0,0,0,0.08)" : "var(--surface-2)",
+                  color: plan.isYellow ? "var(--yellow-ink)" : plan.featured ? "#fff" : "var(--text-muted)",
+                  padding: "0.28rem 0.75rem",
+                  borderRadius: 99,
+                  fontSize: "0.6rem", fontWeight: 700,
+                  letterSpacing: "0.14em", textTransform: "uppercase",
+                  marginBottom: "1.25rem",
+                }}>
+                  {plan.featured && <Sparkles size={9} />}
+                  {plan.badge}
                 </div>
 
-                {/* Plan name */}
+                {/* Name + Price */}
                 <h3 style={{
-                  fontSize: "clamp(1.1rem, 2.5vw, 1.35rem)",
-                  fontWeight: 900,
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(1rem, 2vw, 1.1rem)",
+                  fontWeight: 700,
                   textTransform: "uppercase",
-                  color: featured ? "#fff" : "var(--ink)",
-                  lineHeight: 1.1,
-                  marginBottom: "0.3rem",
+                  letterSpacing: "0.06em",
+                  color: plan.isYellow ? "var(--yellow-ink)" : "#fff",
+                  marginBottom: "0.5rem",
                 }}>
                   {plan.name}
                 </h3>
-
-                {/* Price */}
-                <div style={{
-                  fontSize: "clamp(1.8rem, 4vw, 2.2rem)",
-                  fontWeight: 900,
-                  color: featured ? "#fff" : "var(--ink)",
-                  letterSpacing: "-0.03em",
-                  marginBottom: "1.25rem",
+                <p style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(2rem, 4vw, 2.8rem)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.04em",
+                  color: plan.isYellow ? "var(--yellow-ink)" : "#fff",
                   lineHeight: 1,
+                  marginBottom: "0.35rem",
                 }}>
                   {plan.price}
-                </div>
-
-                {/* Stats pill row */}
-                <div style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr 1fr",
-                  gap: "0.4rem",
+                </p>
+                <p style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: "0.7rem",
+                  color: plan.isYellow ? "rgba(26,21,0,0.55)" : "rgba(255,255,255,0.45)",
                   marginBottom: "1.5rem",
-                  padding: "0.75rem 0.6rem",
-                  background: featured ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.03)",
-                  borderRadius: 5,
-                  border: featured ? "1px solid rgba(255,255,255,0.12)" : "1px solid var(--border)",
                 }}>
-                  {/* Session duration */}
-                  <div style={{ textAlign: "center" }}>
-                    <Route size={13} style={{ color: featured ? "#fff" : "var(--accent)", margin: "0 auto 4px" }} />
-                    <p style={{
-                      fontSize: "clamp(0.55rem, 1.2vw, 0.62rem)",
-                      fontWeight: 800,
-                      color: featured ? "rgba(255,255,255,0.9)" : "var(--ink)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.04em",
-                      lineHeight: 1.3,
-                    }}>
-                      {plan.duration}
-                    </p>
-                    <p style={{
-                      fontSize: "0.5rem",
-                      color: featured ? "rgba(255,255,255,0.45)" : "var(--muted)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      marginTop: 2,
-                    }}>Per Session</p>
-                  </div>
-                  {/* Distance */}
-                  <div style={{
-                    textAlign: "center",
-                    borderLeft: featured ? "1px solid rgba(255,255,255,0.12)" : "1px solid var(--border)",
-                    borderRight: featured ? "1px solid rgba(255,255,255,0.12)" : "1px solid var(--border)",
-                  }}>
-                    <Route size={13} style={{ color: featured ? "#fff" : "var(--accent)", margin: "0 auto 4px" }} />
-                    <p style={{
-                      fontSize: "clamp(0.55rem, 1.2vw, 0.62rem)",
-                      fontWeight: 800,
-                      color: featured ? "rgba(255,255,255,0.9)" : "var(--ink)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.04em",
-                      lineHeight: 1.3,
-                    }}>
-                      {plan.distance}
-                    </p>
-                    <p style={{
-                      fontSize: "0.5rem",
-                      color: featured ? "rgba(255,255,255,0.45)" : "var(--muted)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      marginTop: 2,
-                    }}>Total Dist</p>
-                  </div>
-                  {/* Weeks */}
-                  <div style={{ textAlign: "center" }}>
-                    <Calendar size={13} style={{ color: featured ? "#fff" : "var(--accent)", margin: "0 auto 4px" }} />
-                    <p style={{
-                      fontSize: "clamp(0.55rem, 1.2vw, 0.62rem)",
-                      fontWeight: 800,
-                      color: featured ? "rgba(255,255,255,0.9)" : "var(--ink)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.04em",
-                      lineHeight: 1.3,
-                    }}>
-                      {plan.weeks}
-                    </p>
-                    <p style={{
-                      fontSize: "0.5rem",
-                      color: featured ? "rgba(255,255,255,0.45)" : "var(--muted)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      marginTop: 2,
-                    }}>Duration</p>
-                  </div>
-                </div>
+                  {plan.days} · {plan.sessions} sessions · {plan.km}
+                </p>
 
-                {/* Features list */}
-                <ul style={{ display: "flex", flexDirection: "column", gap: "0.55rem", flex: 1 }}>
-                  {plan.features.map((f) => (
+                {/* Divider */}
+                <div style={{ height: 1, background: plan.featured ? "rgba(255,255,255,0.12)" : plan.isYellow ? "rgba(0,0,0,0.1)" : "var(--border)", marginBottom: "1.25rem" }} />
+
+                {/* Features */}
+                <ul style={{ display: "flex", flexDirection: "column", gap: "0.65rem", marginBottom: "1.75rem" }}>
+                  {plan.features.map(f => (
                     <li key={f} style={{
-                      display: "flex", alignItems: "flex-start", gap: "0.45rem",
-                      fontSize: "clamp(0.74rem, 1.6vw, 0.8rem)", fontWeight: 600,
-                      color: featured ? "rgba(255,255,255,0.88)" : "var(--ink)",
-                      lineHeight: 1.4,
+                      display: "flex", alignItems: "flex-start", gap: "0.55rem",
+                      fontFamily: "var(--font-body)",
+                      fontSize: "clamp(0.78rem, 1.5vw, 0.85rem)",
+                      color: plan.isYellow ? "rgba(26,21,0,0.75)" : "rgba(255,255,255,0.7)",
+                      lineHeight: 1.5,
                     }}>
-                      <CheckCircle2 size={13} style={{ flexShrink: 0, color: featured ? "var(--yellow)" : "var(--accent)", marginTop: 2 }} />
+                      <CheckCircle2 size={13} style={{
+                        color: plan.isYellow ? "var(--yellow-ink)" : plan.featured ? "var(--yellow)" : "var(--accent)",
+                        flexShrink: 0, marginTop: 2,
+                      }} />
                       {f}
                     </li>
                   ))}
@@ -267,34 +161,38 @@ export function PricingPlans() {
                 {/* CTA */}
                 <motion.a
                   href="#contact"
-                  whileHover={{ scale: 1.02, opacity: 0.92 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="btn-shimmer"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                   style={{
-                    marginTop: "1.75rem",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "0.4rem",
-                    padding: "clamp(0.75rem, 1.5vw, 0.85rem)",
-                    border: featured ? "2px solid var(--yellow)" : "2px solid var(--yellow-dark)",
-                    fontWeight: 800,
-                    fontSize: "clamp(0.72rem, 1.5vw, 0.78rem)",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    textDecoration: "none",
-                    background: "var(--yellow)",
-                    color: "var(--yellow-ink)",
-                    borderRadius: 3,
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: "0.4rem",
+                    width: "100%",
+                    background: plan.featured ? "var(--yellow)" : plan.isYellow ? "rgba(0,0,0,0.12)" : "rgba(255,255,255,0.08)",
+                    color: plan.featured ? "var(--yellow-ink)" : plan.isYellow ? "var(--yellow-ink)" : "#fff",
+                    padding: "0.85rem",
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
+                    textTransform: "uppercase", textDecoration: "none",
+                    borderRadius: 8,
+                    border: "none",
+                    transition: "background 0.2s",
                   }}
                 >
-                  Enroll Now
+                  Get Started <ArrowRight size={12} />
                 </motion.a>
               </div>
-            </motion.article>
-          );
-        })}
+            </motion.div>
+          ))}
+        </div>
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .plans-grid-v2 { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 560px) {
+          .plans-grid-v2 { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }

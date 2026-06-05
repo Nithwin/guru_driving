@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Syne, Inter } from "next/font/google";
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-syne",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Sri Guru Driving School | Master the Road with Precision",
+  title: "Guru Driving School | Master the Road — Mettur, TN",
   description:
-    "Premium driving education in the heart of the city. Safety-focused, RTO-certified, and trusted by 5000+ graduates. Book your first lesson today.",
-  keywords: "driving school, learn to drive, RTO, driving lessons, beginner driving, Sri Guru",
+    "Premium driving education in Mettur, Tamil Nadu. Safety-first, RTO-certified, with doorstep pickup across Kolathur, RS, Mecheri & surrounding areas. Trusted by 5000+ graduates.",
+  keywords: "driving school mettur, learn to drive kolathur, RTO driving lessons, guru driving school TN",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -16,39 +31,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Sri Guru Driving School",
-    "description": "Premium, friendly driving education in the city. Dual-control vehicles and certified instructors.",
-    "url": "https://srigurudriving.com",
-    "telephone": "+919000000000",
-    "openingHours": "Mo-Su 06:00-20:00"
+    "name": "Guru Driving School",
+    "description": "Premium driving education in Mettur, TN. Doorstep pickup available.",
+    "url": "https://gurudrivingschool.in",
+    "telephone": "+917092063335",
+    "address": { "@type": "PostalAddress", "addressLocality": "Mettur", "addressRegion": "Tamil Nadu", "addressCountry": "IN" },
+    "openingHours": "Mo-Su 06:00-20:00",
   };
 
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className={`${syne.variable} ${inter.variable}`}>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body
-        className="min-h-full"
-        style={{ fontFamily: "'Montserrat', system-ui, sans-serif", background: "#fafafa" }}
-      >
+      <body>
         {children}
       </body>
     </html>

@@ -2,166 +2,169 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone, MapPin, CheckCircle2 } from "lucide-react";
 import { Reveal } from "./Animations";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function CtaSection() {
   const [phone, setPhone] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phone.trim()) return;
+    setSent(true);
+  };
 
   return (
-    <section
-      id="contact"
-      className="cta-section"
-      style={{
-        marginTop: "var(--section-gap, 5rem)",
-        padding: "clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 1.5rem)",
-        background: "var(--yellow)",
-        color: "var(--ink)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1000,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "clamp(2rem, 5vw, 4rem)",
-          alignItems: "center",
-        }}
-        className="cta-inner-grid"
-      >
-        {/* Left Side: Copy */}
+    <section id="contact" style={{ padding: "var(--section-py) 0" }}>
+      <div className="container">
         <Reveal>
-          <p className="eyebrow" style={{ marginBottom: "1rem", color: "var(--accent)" }}>Get Started</p>
-          <h2 style={{
-            fontSize: "clamp(2rem, 5vw, 4rem)",
-            fontWeight: 900,
-            textTransform: "uppercase",
-            lineHeight: 1.04,
-            letterSpacing: "-0.025em",
-          }}>
-            Ready to <br />
-            <span style={{ color: "var(--accent)" }}>Drive?</span>
-          </h2>
-          <p style={{
-            fontSize: "clamp(0.84rem, 1.8vw, 0.95rem)",
-            lineHeight: 1.8,
-            color: "var(--yellow-ink)",
-            marginTop: "1.25rem",
-            maxWidth: 380,
-          }}>
-            Drop your number below and our team will get back to you immediately to schedule your first lesson.
-          </p>
-
-          {/* Location Map */}
           <div style={{
-            marginTop: "2rem",
-            height: "clamp(140px, 20vw, 180px)",
-            borderRadius: 6,
-            border: "2px solid var(--ink)",
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
+            borderRadius: 24,
             overflow: "hidden",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
+            display: "grid",
+            gridTemplateColumns: "1.1fr 0.9fr",
             position: "relative",
-          }}>
+          }} className="cta-inner-grid">
+            {/* Background glow */}
             <div style={{
-              position: "absolute", top: 0, left: 0, right: 0,
-              padding: "0.38rem 0.75rem", background: "var(--ink)", color: "#fff",
-              fontSize: "0.6rem", fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase",
-              display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 2,
-            }}>
-              <span>Our Training Hub</span>
-              <span style={{ color: "var(--yellow)" }}>● Open Today</span>
-            </div>
-            <iframe
-              src="https://maps.google.com/maps?q=Kolathur,+Mettur,+Salem,+Tamil+Nadu&t=&z=14&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0, filter: "grayscale(100%) contrast(1.1)", transform: "translateY(15px)" }}
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Sri Guru Driving School Location"
-            />
-          </div>
-        </Reveal>
-
-        {/* Right Side: Simple Contact Form */}
-        <Reveal delay={0.15}>
-          <div style={{
-            background: "#0f0f0f",
-            border: "1.5px solid rgba(255,255,255,0.08)",
-            borderRadius: 10,
-            padding: "clamp(1.5rem, 3vw, 2.5rem)",
-            position: "relative",
-            overflow: "hidden",
-            color: "#fff",
-          }}>
-            {/* Ambient glow */}
-            <div style={{
-              position: "absolute",
-              top: -40,
-              right: -40,
-              width: 150,
-              height: 150,
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(0,102,255,0.15) 0%, transparent 70%)",
-              pointerEvents: "none",
+              position: "absolute", top: 0, right: 0,
+              width: "50%", height: "100%",
+              background: "radial-gradient(circle at 80% 50%, rgba(0,85,233,0.08) 0%, transparent 60%)",
+              pointerEvents: "none", zIndex: 0,
             }} />
 
-            <div style={{ minHeight: "clamp(180px, 25vw, 220px)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <h3 style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.4rem)", fontWeight: 800, textTransform: "uppercase", marginBottom: "0.5rem", letterSpacing: "-0.01em" }}>
-                Request a Callback
-              </h3>
-              <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "clamp(0.75rem, 1.6vw, 0.85rem)", marginBottom: "1.5rem", lineHeight: 1.5 }}>
-                We'll call you back quickly to discuss plans, timings, and doorstep pickup options.
+            {/* LEFT */}
+            <div style={{ padding: "clamp(2rem, 5vw, 4rem)", position: "relative", zIndex: 1 }}>
+              <p className="eyebrow" style={{ marginBottom: "0.75rem" }}>Get Started</p>
+              <h2 style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2rem, 5vw, 4rem)",
+                fontWeight: 800,
+                letterSpacing: "-0.04em",
+                textTransform: "uppercase",
+                lineHeight: 1.04,
+                color: "#fff",
+                marginBottom: "1rem",
+              }}>
+                Ready to<br />
+                <span className="gradient-text-blue">Drive?</span>
+              </h2>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.82rem, 1.8vw, 0.9rem)", lineHeight: 1.8, color: "var(--text-muted)", maxWidth: 340, marginBottom: "1.75rem" }}>
+                Drop your number and we'll call you back immediately to discuss plans, timings, and pickup from your doorstep.
               </p>
 
-              <input
-                type="tel"
-                placeholder="Your Phone Number"
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "clamp(0.85rem, 1.8vw, 1.2rem)",
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1.5px solid rgba(255,255,255,0.1)",
-                  color: "#fff",
-                  borderRadius: 5,
-                  outline: "none",
-                  fontSize: "clamp(0.9rem, 2vw, 1rem)",
-                  fontWeight: 600,
-                  marginBottom: "0.85rem",
-                  transition: "border-color 0.2s",
-                }}
-              />
-              <motion.button
-                whileHover={{ scale: 1.02, boxShadow: "0 8px 24px rgba(0,102,255,0.35)" }}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  width: "100%",
-                  padding: "clamp(0.85rem, 2vw, 1.2rem)",
-                  background: "var(--accent)",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 5,
-                  fontWeight: 800,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "0.5rem",
-                  fontSize: "clamp(0.8rem, 1.8vw, 0.88rem)",
-                }}
-              >
-                Get a Call Back <ArrowRight size={15} />
-              </motion.button>
+              {/* Pickup areas */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                {["Mettur", "Kolathur", "RS", "Mecheri"].map(area => (
+                  <span key={area} style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.3rem",
+                    background: "var(--surface-2)", border: "1px solid var(--border-mid)",
+                    color: "var(--text-muted)",
+                    padding: "0.3rem 0.7rem",
+                    borderRadius: 99,
+                    fontFamily: "var(--font-body)",
+                    fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                  }}>
+                    <MapPin size={9} style={{ color: "var(--accent)" }} />
+                    {area}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT — Form */}
+            <div style={{
+              padding: "clamp(2rem, 5vw, 4rem)",
+              background: "var(--surface-2)",
+              borderLeft: "1px solid var(--border)",
+              position: "relative", zIndex: 1,
+              display: "flex", flexDirection: "column", justifyContent: "center",
+            }}>
+              {!sent ? (
+                <>
+                  <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(1.1rem, 2.5vw, 1.3rem)", textTransform: "uppercase", letterSpacing: "-0.01em", color: "#fff", marginBottom: "0.45rem" }}>
+                    Request a Callback
+                  </h3>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", color: "var(--text-muted)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+                    We'll get back to you within minutes during school hours.
+                  </p>
+                  <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+                    <input
+                      type="tel"
+                      className="dark-input"
+                      placeholder="Your Phone Number"
+                      value={phone}
+                      onChange={e => setPhone(e.target.value)}
+                      required
+                    />
+                    <motion.button
+                      type="submit"
+                      whileHover={{ scale: 1.02, boxShadow: "0 8px 28px rgba(0,85,233,0.35)" }}
+                      whileTap={{ scale: 0.97 }}
+                      style={{
+                        display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",
+                        background: "var(--accent)", color: "#fff",
+                        border: "none", borderRadius: 8, cursor: "pointer",
+                        padding: "0.9rem",
+                        fontFamily: "var(--font-body)",
+                        fontSize: "0.75rem", fontWeight: 800,
+                        letterSpacing: "0.1em", textTransform: "uppercase",
+                      }}
+                    >
+                      Get a Call Back <ArrowRight size={14} />
+                    </motion.button>
+                    <a
+                      href="tel:+917092063335"
+                      style={{
+                        display: "flex", alignItems: "center", justifyContent: "center", gap: "0.4rem",
+                        background: "transparent",
+                        color: "var(--text-muted)",
+                        border: "1px solid var(--border-mid)",
+                        borderRadius: 8, padding: "0.75rem",
+                        fontFamily: "var(--font-body)",
+                        fontSize: "0.7rem", fontWeight: 600,
+                        letterSpacing: "0.08em", textTransform: "uppercase",
+                        textDecoration: "none",
+                        transition: "color 0.2s, border-color 0.2s",
+                      }}
+                    >
+                      <Phone size={12} /> Call Directly
+                    </a>
+                  </form>
+                </>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: EASE }}
+                  style={{ textAlign: "center" }}
+                >
+                  <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(34,197,94,0.12)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1rem" }}>
+                    <CheckCircle2 size={28} style={{ color: "#22c55e" }} />
+                  </div>
+                  <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "1.2rem", color: "#fff", marginBottom: "0.5rem" }}>We'll Call You Back!</h3>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: "0.82rem", color: "var(--text-muted)", lineHeight: 1.6 }}>
+                    Our team will reach out shortly. Meanwhile, feel free to call us directly.
+                  </p>
+                </motion.div>
+              )}
             </div>
           </div>
         </Reveal>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .cta-inner-grid { grid-template-columns: 1fr !important; }
+          .cta-inner-grid > div:last-child { border-left: none !important; border-top: 1px solid var(--border); }
+        }
+      `}</style>
     </section>
   );
 }

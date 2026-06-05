@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
-import { ScaleIn } from "./Animations";
-import { Users, Award, Headphones, CheckSquare } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Users, Award, Clock, CheckSquare } from "lucide-react";
+import { Reveal } from "./Animations";
 
 function CountUp({ target, suffix = "" }: { target: number | string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -13,11 +13,11 @@ function CountUp({ target, suffix = "" }: { target: number | string; suffix?: st
 
   useEffect(() => {
     if (!inView || !isNum) return;
-    let start = 0;
     const end = target as number;
-    const dur = 1600;
+    const dur = 1800;
     const step = 16;
     const inc = (end / dur) * step;
+    let start = 0;
     const timer = setInterval(() => {
       start += inc;
       if (start >= end) { start = end; clearInterval(timer); }
@@ -26,46 +26,38 @@ function CountUp({ target, suffix = "" }: { target: number | string; suffix?: st
     return () => clearInterval(timer);
   }, [inView, target, isNum]);
 
-  return (
-    <span ref={ref} style={{ display: "inline-block", minWidth: "3ch" }}>
-      {isNum ? val : target}{suffix}
-    </span>
-  );
+  return <span ref={ref}>{isNum ? val : target}{suffix}</span>;
 }
 
-const stats = [
+const STATS = [
   { value: 5000, suffix: "+", label: "Students Passed", icon: Users },
   { value: 12, suffix: "+", label: "Years Experience", icon: Award },
-  { value: "24/7", suffix: "", label: "Support Available", icon: Headphones },
+  { value: "24/7", suffix: "", label: "Support Available", icon: Clock },
   { value: 100, suffix: "%", label: "Pass Guarantee", icon: CheckSquare },
 ];
 
 export function StatsSection() {
   return (
-    <section className="stats-section" style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}>
+    <section style={{ borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
       <div className="container">
         <div className="stats-grid">
-          {stats.map((s, i) => {
+          {STATS.map((s, i) => {
             const Icon = s.icon;
             return (
-              <ScaleIn key={s.label} delay={i * 0.1}>
-                <div className="stat-item">
-                  <div style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginBottom: "0.5rem",
-                  }}>
-                    <Icon
-                      size={20}
-                      style={{ color: "var(--ink)", opacity: 0.3 }}
-                    />
-                  </div>
-                  <span className="stat-value">
-                    <CountUp target={s.value as number} suffix={s.suffix} />
-                  </span>
-                  <span className="stat-label">{s.label}</span>
-                </div>
-              </ScaleIn>
+              <motion.div
+                key={s.label}
+                className="stat-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <Icon size={16} style={{ color: "var(--text-dim)", marginBottom: "0.6rem" }} />
+                <span className="stat-value">
+                  <CountUp target={s.value as number} suffix={s.suffix} />
+                </span>
+                <span className="stat-label">{s.label}</span>
+              </motion.div>
             );
           })}
         </div>
