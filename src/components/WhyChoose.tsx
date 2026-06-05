@@ -108,7 +108,7 @@ export function WhyChoose() {
               fontWeight: 900, textTransform: "uppercase", marginBottom: "0.35rem",
             }}>Flexible Slots</h3>
             <p style={{ fontSize: "clamp(0.76rem, 1.7vw, 0.82rem)", lineHeight: 1.75, color: "var(--yellow-ink)" }}>
-              Morning, late-night, or weekend sessions tailored to your busy lifestyle.
+              Morning or weekend sessions tailored to your busy lifestyle.
             </p>
           </div>
         </motion.div>
@@ -164,7 +164,7 @@ export function WhyChoose() {
               fontWeight: 900, textTransform: "uppercase", marginBottom: "0.35rem",
             }}>Doorstep Pickup</h3>
             <p style={{ fontSize: "clamp(0.76rem, 1.7vw, 0.82rem)", lineHeight: 1.75, color: "var(--muted)" }}>
-              Free pickup &amp; drop available across Mettur, Kolathur, RS, Mecheri, and surrounding areas. Start your lesson right from home!
+              Servicing areas across Kolathur, Karungallur, Pannavadi, Boomanur, Thanda, Mettur, RS, Kunjandiyur, Nangavalli, and Pottaneri.
             </p>
           </div>
         </motion.div>
