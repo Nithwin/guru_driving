@@ -44,7 +44,7 @@ export function InstructorPhilosophy() {
             <motion.div style={{ position: "absolute", inset: "-15%", y: imageY }}>
               <Image
                 src="/instructor.png"
-                alt="Instructor teaching student"
+                alt="Vignesh teaching student"
                 fill
                 sizes="(max-width:768px) 100vw, 50vw"
                 style={{ objectFit: "cover" }}
@@ -84,10 +84,10 @@ export function InstructorPhilosophy() {
 
           {/* Text side */}
           <div style={{ padding: "clamp(0.5rem, 1.5vw, 1rem) 0" }}>
-            <p className="eyebrow" style={{ marginBottom: "0.6rem" }}>Our Promise</p>
+            <p className="eyebrow" style={{ marginBottom: "0.6rem" }}>Meet Your Instructor</p>
             <h2 className="section-title" style={{ fontSize: "clamp(1.5rem, 3vw, 2.4rem)" }}>
-              We&apos;re Here to Help You <br />
-              <span className="accent">Love Driving.</span>
+              Learn with <br />
+              <span className="accent">Vignesh.</span>
             </h2>
             <p style={{
               fontSize: "clamp(0.82rem, 1.8vw, 0.9rem)",
@@ -96,15 +96,16 @@ export function InstructorPhilosophy() {
               marginTop: "1rem",
               maxWidth: 400,
             }}>
-              Learning to drive shouldn&apos;t be scary. Our local, certified instructors sit right beside you with dual controls, ensuring you are 100% safe while you learn at your own pace.
+              With years of professional driving instruction experience, Vignesh is dedicated to turning nervous beginners into confident, safe, and skilled drivers on the roads of Mettur.
             </p>
 
             {/* Checkmarks */}
             <ul style={{ marginTop: "1rem", display: "flex", flexDirection: "column", gap: "0.45rem" }}>
               {[
-                "Patient & certified instructors",
-                "Dual-control safety in every lesson",
-                "Learn at your own comfortable pace",
+                "Patient & Friendly Approach",
+                "Certified Instructor",
+                "Focus on 100% Pass Rate",
+                "Pickup & Drop (Mettur, Kolathur, RS, Mecheri)",
               ].map(item => (
                 <li key={item} style={{
                   display: "flex",

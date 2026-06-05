@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Clock3, CarFront, BadgeCheck, ArrowRight } from "lucide-react";
+import { ShieldCheck, Clock3, CarFront, MapPin, ArrowRight } from "lucide-react";
 import { Reveal3D } from "./Animations";
 
 export function WhyChoose() {
@@ -157,15 +157,15 @@ export function WhyChoose() {
             display: "flex", alignItems: "center", justifyContent: "center",
             background: "#fff", color: "var(--accent)", flexShrink: 0,
           }}>
-            <BadgeCheck size={18} />
+            <MapPin size={18} />
           </div>
           <div>
             <h3 style={{
               fontSize: "clamp(0.9rem, 2vw, 1rem)",
               fontWeight: 900, textTransform: "uppercase", marginBottom: "0.35rem",
-            }}>Local Pros</h3>
+            }}>Doorstep Pickup</h3>
             <p style={{ fontSize: "clamp(0.76rem, 1.7vw, 0.82rem)", lineHeight: 1.75, color: "var(--muted)" }}>
-              RTO-aware instructors who know the roads, test routes, and common mistakes to avoid.
+              Free pickup &amp; drop available across Mettur, Kolathur, RS, Mecheri, and surrounding areas. Start your lesson right from home!
             </p>
           </div>
         </motion.div>

@@ -11,7 +11,7 @@ const CarScene = dynamic(() => import("./CarScene").then((m) => ({ default: m.Ca
     <div style={{
       height: "100%",
       width: "100%",
-      background: "linear-gradient(135deg,#f5c800 0%,#e6b800 100%)",
+      background: "linear-gradient(135deg,#ffd500 0%,#ccaa00 100%)",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -23,14 +23,14 @@ const CarScene = dynamic(() => import("./CarScene").then((m) => ({ default: m.Ca
         <path d="M25 28 C30 12 40 8 60 8 C80 8 90 12 95 28 Z" fill="#0d0d0d" />
         <circle cx="30" cy="50" r="9" fill="#0d0d0d" />
         <circle cx="90" cy="50" r="9" fill="#0d0d0d" />
-        <circle cx="30" cy="50" r="5" fill="#f5c800" />
-        <circle cx="90" cy="50" r="5" fill="#f5c800" />
+        <circle cx="30" cy="50" r="5" fill="#ffd500" />
+        <circle cx="90" cy="50" r="5" fill="#ffd500" />
       </svg>
       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
         <div style={{
           width: 18, height: 18,
           border: "2.5px solid rgba(0,0,0,0.12)",
-          borderTopColor: "#cc0033",
+          borderTopColor: "#0066ff",
           borderRadius: "50%",
           animation: "spin 0.8s linear infinite",
           flexShrink: 0,
@@ -49,7 +49,7 @@ const CarScene = dynamic(() => import("./CarScene").then((m) => ({ default: m.Ca
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
-const featurePills = ["Dual-control vehicles", "RTO-focused", "Flexible slots", "5000+ passed"];
+const featurePills = ["Dual-control vehicles", "Weekend Classes", "RTO-focused", "Flexible slots"];
 
 export function HeroSection() {
   return (
@@ -57,43 +57,48 @@ export function HeroSection() {
       {/* ── LEFT: Text ── */}
       <div style={{ display: "flex", flexDirection: "column", gap: "clamp(1rem, 2.5vw, 1.5rem)" }}>
 
-        {/* Eyebrow tag */}
         <Reveal delay={0.05}>
-          <span style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            background: "#fef9e7",
-            border: "1.5px solid var(--yellow-dark)",
-            color: "var(--yellow-ink)",
-            fontSize: "clamp(0.6rem, 1.5vw, 0.68rem)",
-            fontWeight: 800,
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            padding: "0.35rem 0.85rem",
-            borderRadius: 2,
-            whiteSpace: "nowrap",
-          }}>
-            <Shield size={10} />
-            Accelerate Your Confidence
-          </span>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASE }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              background: "rgba(0,102,255,0.06)",
+              border: "1.5px solid rgba(0,102,255,0.2)",
+              color: "var(--accent)",
+              fontSize: "clamp(0.65rem, 1.5vw, 0.75rem)",
+              fontWeight: 800,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              padding: "0.45rem 1rem",
+              borderRadius: 100,
+              whiteSpace: "nowrap",
+              boxShadow: "0 4px 12px rgba(0,102,255,0.08)",
+            }}
+          >
+            <Shield size={13} style={{ color: "var(--accent)" }} />
+            Guru Driving School <span style={{ opacity: 0.4 }}>•</span> Mettur, TN
+          </motion.div>
         </Reveal>
 
         {/* Headline */}
         <div style={{ overflow: "visible" }}>
           <h1 style={{
-            fontSize: "clamp(2rem, 5.5vw, 4rem)",
+            fontSize: "clamp(2.2rem, 6vw, 4.2rem)",
             fontWeight: 900,
             lineHeight: 1.05,
-            letterSpacing: "-0.025em",
+            letterSpacing: "-0.03em",
             textTransform: "uppercase",
             color: "var(--ink)",
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
           }}>
-            <RevealText text="LEARN TO" delay={0.15} style={{ display: "block" }} />
-            <RevealText text="DRIVE WITH" delay={0.35} style={{ display: "block" }} />
+            <RevealText text="MASTER THE" delay={0.15} style={{ display: "block" }} />
+            <RevealText text="ROAD WITH" delay={0.35} style={{ display: "block" }} />
             <div style={{ display: "inline-block", marginTop: "0.05em", wordWrap: "break-word", whiteSpace: "normal" }}>
               <span style={{ color: "var(--accent)", position: "relative", display: "inline-block" }}>
                 <RevealText text="CONFIDENCE." delay={0.65} style={{ display: "inline-block" }} />
@@ -101,17 +106,18 @@ export function HeroSection() {
                 <motion.span
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
-                  transition={{ delay: 1.2, duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
+                  transition={{ delay: 1.2, duration: 0.8, ease: EASE }}
                   style={{
                     position: "absolute",
-                    bottom: "0.05em",
+                    bottom: "0.1em",
                     left: 0,
                     right: 0,
-                    height: "0.1em",
+                    height: "0.15em",
                     background: "var(--yellow)",
                     transformOrigin: "left",
                     display: "block",
-                    zIndex: -1
+                    zIndex: -1,
+                    borderRadius: 2,
                   }}
                 />
               </span>
@@ -320,7 +326,7 @@ export function HeroSection() {
               top: "18%",
               right: "-0.75rem",
               background: "var(--accent)",
-              boxShadow: "0 8px 32px rgba(204,0,51,0.3)",
+              boxShadow: "0 8px 32px rgba(0,102,255,0.3)",
               padding: "clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1.1rem)",
               borderRadius: 6,
               zIndex: 3,

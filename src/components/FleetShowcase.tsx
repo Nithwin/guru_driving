@@ -23,31 +23,31 @@ export function FleetShowcase() {
   const fleetY = useTransform(fleetScroll, [0, 1], ["-12%", "12%"]);
   const roadY = useTransform(roadScroll, [0, 1], ["-15%", "15%"]);
 
-  const fleetFeatures = [
-    "Dual-control safety system",
-    "Full AC & comfortable seats",
-    "Fully insured & GPS tracked",
-    "Regularly serviced",
+  const trainerFeatures = [
+    "Patient & Friendly Approach",
+    "Certified Instructor",
+    "Defensive Driving Expert",
+    "Focus on 100% Pass Rate",
   ];
 
   return (
     <>
-      {/* ════ FLEET SHOWCASE ════ */}
-      <section id="fleet" style={{ marginTop: "var(--section-gap, 5rem)" }}>
+      {/* ════ TRAINER PROFILE ════ */}
+      <section id="trainer" style={{ marginTop: "var(--section-gap, 5rem)" }}>
         <Reveal style={{ textAlign: "center", marginBottom: "clamp(1.5rem, 3vw, 2.5rem)" }}>
-          <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>Our Fleet</p>
+          <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>Meet Your Instructor</p>
           <h2 className="section-title">
-            Modern, Safe &amp; <span className="accent">Always Ready.</span>
+            Learn with <span className="accent">Vignesh.</span>
           </h2>
           <p style={{
             fontSize: "clamp(0.82rem, 1.8vw, 0.88rem)",
             color: "var(--muted)",
             marginTop: "0.75rem",
-            maxWidth: 480,
+            maxWidth: 520,
             margin: "0.75rem auto 0",
             lineHeight: 1.7,
           }}>
-            Every vehicle in our fleet is dual-control, regularly serviced, and equipped for both beginner and advanced training.
+            With years of professional driving instruction experience, Vignesh is dedicated to turning nervous beginners into confident, safe, and skilled drivers on the roads of Mettur.
           </p>
         </Reveal>
 
@@ -86,16 +86,16 @@ export function FleetShowcase() {
             }}>
               <div>
                 <p style={{ color: "#fff", fontWeight: 900, fontSize: "clamp(1rem, 2.5vw, 1.2rem)", textTransform: "uppercase" }}>
-                  Suzuki Swift Fleet
+                  Expert Guidance
                 </p>
                 <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "clamp(0.68rem, 1.5vw, 0.75rem)", fontWeight: 600, marginTop: "0.2rem" }}>
-                  Dual-control · AC · Fully insured · GPS tracked
+                  Learn from the best • Mettur, TN
                 </p>
               </div>
 
               {/* Feature pills */}
               <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
-                {fleetFeatures.slice(0, 2).map(f => (
+                {trainerFeatures.slice(0, 2).map(f => (
                   <span key={f} style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -120,7 +120,7 @@ export function FleetShowcase() {
           </div>
         </Reveal>
 
-        {/* Fleet feature grid */}
+        {/* Trainer feature grid */}
         <Reveal delay={0.2}>
           <div className="fleet-features-grid" style={{
             display: "grid",
@@ -130,7 +130,7 @@ export function FleetShowcase() {
             borderTop: "none",
             marginTop: 0,
           }}>
-            {fleetFeatures.map((f, i) => (
+            {trainerFeatures.map((f, i) => (
               <div key={f} style={{
                 padding: "0.85rem 1rem",
                 borderRight: i < 3 ? "1px solid var(--border)" : "none",

@@ -39,6 +39,18 @@ function CarMesh() {
     if (!groupRef.current || fitted.current) return;
     fitted.current = true;
 
+    // Change car color to blue
+    scene.traverse((child: any) => {
+      if (child.isMesh && child.material) {
+        const mats = Array.isArray(child.material) ? child.material : [child.material];
+        mats.forEach(m => {
+          if (m.name && m.name.toLowerCase().includes("paint")) {
+            m.color.set("#0066ff");
+          }
+        });
+      }
+    });
+
     const box = new THREE.Box3().setFromObject(groupRef.current);
     const size = new THREE.Vector3();
     const center = new THREE.Vector3();
@@ -82,7 +94,7 @@ function CanvasErrorFallback() {
   return (
     <div style={{
       height: "100%", width: "100%",
-      background: "linear-gradient(135deg, #f5c800 0%, #e6b800 100%)",
+      background: "linear-gradient(135deg, #ffd500 0%, #ccaa00 100%)",
       display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center", gap: "0.75rem",
     }}>
@@ -91,8 +103,8 @@ function CanvasErrorFallback() {
         <path d="M25 28 C30 12 40 8 60 8 C80 8 90 12 95 28 Z" fill="#0d0d0d" />
         <circle cx="30" cy="50" r="9" fill="#0d0d0d" />
         <circle cx="90" cy="50" r="9" fill="#0d0d0d" />
-        <circle cx="30" cy="50" r="5" fill="#f5c800" />
-        <circle cx="90" cy="50" r="5" fill="#f5c800" />
+        <circle cx="30" cy="50" r="5" fill="#ffd500" />
+        <circle cx="90" cy="50" r="5" fill="#ffd500" />
       </svg>
       <p style={{ fontSize: "0.6rem", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(0,0,0,0.35)" }}>
         Sri Guru Driving School
@@ -121,7 +133,7 @@ export function CarScene() {
         <directionalLight position={[-3, 3, 2]} intensity={1.4} color="#c8d8ff" />
         <directionalLight position={[0, 2, -5]} intensity={1.0} color="#fff0f0" />
         <directionalLight position={[0, -3, 3]} intensity={0.4} color="#ffe8c8" />
-        <pointLight position={[0, -0.4, 2.5]} intensity={1.8} color="#cc0033" distance={6} decay={2} />
+        <pointLight position={[0, -0.4, 2.5]} intensity={1.8} color="#0066ff" distance={6} decay={2} />
 
         <Suspense fallback={null}>
           <CarMesh />
