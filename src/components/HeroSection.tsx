@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Shield } from "lucide-react";
+import { ArrowRight, Shield } from "lucide-react";
 import { Reveal, RevealText } from "./Animations";
 
 const CarScene = dynamic(() => import("./CarScene").then((m) => ({ default: m.CarScene })), {
@@ -11,140 +11,162 @@ const CarScene = dynamic(() => import("./CarScene").then((m) => ({ default: m.Ca
     <div style={{
       height: "100%",
       width: "100%",
-      background: "linear-gradient(135deg,#111 0%,#1a1a2e 100%)",
+      background: "linear-gradient(135deg,#ffd500 0%,#ccaa00 100%)",
       display: "flex",
+      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      gap: "1.25rem",
     }}>
-      <div style={{
-        width: 40, height: 40,
-        border: "3px solid rgba(255,255,255,0.1)",
-        borderTopColor: "var(--accent)",
-        borderRadius: "50%",
-        animation: "spin 0.8s linear infinite",
-      }} />
+      <svg width="120" height="60" viewBox="0 0 120 60" fill="none" style={{ opacity: 0.35 }}>
+        <rect x="10" y="28" width="100" height="20" rx="4" fill="#0d0d0d" />
+        <path d="M25 28 C30 12 40 8 60 8 C80 8 90 12 95 28 Z" fill="#0d0d0d" />
+        <circle cx="30" cy="50" r="9" fill="#0d0d0d" />
+        <circle cx="90" cy="50" r="9" fill="#0d0d0d" />
+        <circle cx="30" cy="50" r="5" fill="#ffd500" />
+        <circle cx="90" cy="50" r="5" fill="#ffd500" />
+      </svg>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <div style={{
+          width: 18, height: 18,
+          border: "2.5px solid rgba(0,0,0,0.12)",
+          borderTopColor: "#0066ff",
+          borderRadius: "50%",
+          animation: "spin 0.8s linear infinite",
+          flexShrink: 0,
+        }} />
+        <span style={{
+          fontSize: "0.58rem", fontWeight: 800,
+          letterSpacing: "0.2em", textTransform: "uppercase",
+          color: "rgba(0,0,0,0.45)",
+        }}>Loading 3D Model...</span>
+      </div>
       <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
     </div>
   ),
 });
 
+
 const EASE = [0.76, 0, 0.24, 1] as const;
 
-const featurePills = ["Dual-control vehicles", "RTO-focused", "Flexible slots", "5000+ passed"];
+const featurePills = ["Dual-control vehicles", "Weekend Classes", "RTO-focused", "Flexible slots"];
 
 export function HeroSection() {
   return (
     <section id="home" className="hero-section">
       {/* ── LEFT: Text ── */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "clamp(1rem, 2.5vw, 1.5rem)" }}>
 
-        {/* Eyebrow tag */}
         <Reveal delay={0.05}>
-          <span style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            background: "#fff5f7",
-            border: "1.5px solid #ffccd5",
-            color: "var(--accent)",
-            fontSize: "0.65rem",
-            fontWeight: 800,
-            letterSpacing: "0.22em",
-            textTransform: "uppercase",
-            padding: "0.35rem 0.8rem",
-            borderRadius: 2,
-          }}>
-            <Shield size={10} />
-            Accelerate Your Confidence
-          </span>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: EASE }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              background: "rgba(0,102,255,0.06)",
+              border: "1.5px solid rgba(0,102,255,0.2)",
+              color: "var(--accent)",
+              fontSize: "clamp(0.65rem, 1.5vw, 0.75rem)",
+              fontWeight: 800,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              padding: "0.45rem 1rem",
+              borderRadius: 100,
+              whiteSpace: "nowrap",
+              boxShadow: "0 4px 12px rgba(0,102,255,0.08)",
+            }}
+          >
+            <Shield size={13} style={{ color: "var(--accent)" }} />
+            Guru Driving School <span style={{ opacity: 0.4 }}>•</span> Mettur, TN
+          </motion.div>
         </Reveal>
 
         {/* Headline */}
-        <div style={{ overflow: "hidden" }}>
+        <div style={{ overflow: "visible" }}>
           <h1 style={{
-            fontSize: "clamp(2.4rem, 5.5vw, 4.2rem)",
+            fontSize: "clamp(2.2rem, 6vw, 4.2rem)",
             fontWeight: 900,
-            lineHeight: 1.02,
-            letterSpacing: "-0.025em",
+            lineHeight: 1.05,
+            letterSpacing: "-0.03em",
             textTransform: "uppercase",
             color: "var(--ink)",
-            maxWidth: 520,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
           }}>
-            <motion.span
-              style={{ display: "block", overflow: "hidden" }}
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.15, duration: 0.75, ease: EASE }}
-            >
-              Master the Road
-            </motion.span>
-            <motion.span
-              style={{ display: "block", overflow: "hidden" }}
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.25, duration: 0.75, ease: EASE }}
-            >
-              with{" "}
+            <RevealText text="MASTER THE" delay={0.15} style={{ display: "block" }} />
+            <RevealText text="ROAD WITH" delay={0.35} style={{ display: "block" }} />
+            <div style={{ display: "inline-block", marginTop: "0.05em", wordWrap: "break-word", whiteSpace: "normal" }}>
               <span style={{ color: "var(--accent)", position: "relative", display: "inline-block" }}>
-                Precision.
+                <RevealText text="CONFIDENCE." delay={0.65} style={{ display: "inline-block" }} />
                 {/* Underline accent */}
                 <motion.span
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.7, duration: 0.55, ease: EASE }}
+                  transition={{ delay: 1.2, duration: 0.8, ease: EASE }}
                   style={{
                     position: "absolute",
-                    bottom: -4,
+                    bottom: "0.1em",
                     left: 0,
                     right: 0,
-                    height: 4,
+                    height: "0.15em",
                     background: "var(--yellow)",
                     transformOrigin: "left",
                     display: "block",
+                    zIndex: -1,
+                    borderRadius: 2,
                   }}
                 />
               </span>
-            </motion.span>
+            </div>
           </h1>
         </div>
 
         {/* Subtext */}
         <Reveal delay={0.4} y={20}>
-          <p style={{ fontSize: "0.95rem", lineHeight: 1.85, color: "var(--muted)", maxWidth: 430 }}>
-            Premium driving education where safety meets high-performance instruction.
-            From first-time steering to professional maneuvers, we drive excellence.
+          <p style={{
+            fontSize: "clamp(0.85rem, 2vw, 0.95rem)",
+            lineHeight: 1.85,
+            color: "var(--muted)",
+            maxWidth: 420,
+          }}>
+            We know getting behind the wheel can feel overwhelming. Our friendly, patient instructors are here to help you feel safe, relaxed, and ready for the road.
           </p>
         </Reveal>
 
         {/* CTA Row */}
         <Reveal delay={0.5} y={20}>
-          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "0.65rem", flexWrap: "wrap", alignItems: "center" }}>
             <motion.a
               href="#plans"
-              whileHover={{ scale: 1.03, boxShadow: "0 8px 28px rgba(204,0,51,0.35)" }}
+              whileHover={{ scale: 1.03, boxShadow: "0 8px 28px rgba(245,200,0,0.5)" }}
               whileTap={{ scale: 0.97 }}
+              className="btn-shimmer"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.5rem",
-                background: "var(--accent)",
-                color: "#fff",
-                padding: "0.9rem 1.9rem",
-                fontSize: "0.78rem",
+                background: "var(--yellow)",
+                color: "var(--yellow-ink)",
+                padding: "clamp(0.75rem, 1.5vw, 0.9rem) clamp(1.25rem, 3vw, 1.9rem)",
+                fontSize: "clamp(0.7rem, 1.5vw, 0.78rem)",
                 fontWeight: 800,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 textDecoration: "none",
                 borderRadius: 3,
-                border: "2px solid var(--accent)",
+                border: "2px solid var(--yellow-dark)",
               }}
             >
               Book Your First Lesson
-              <ArrowRight size={14} />
+              <ArrowRight size={13} />
             </motion.a>
             <motion.a
               href="#plans"
-              whileHover={{ background: "var(--ink)", color: "#fff" }}
+              whileHover={{ background: "var(--ink)", color: "#fff", borderColor: "var(--ink)" }}
               whileTap={{ scale: 0.97 }}
               style={{
                 display: "inline-flex",
@@ -152,15 +174,15 @@ export function HeroSection() {
                 gap: "0.5rem",
                 background: "transparent",
                 color: "var(--ink)",
-                padding: "0.9rem 1.6rem",
-                fontSize: "0.78rem",
+                padding: "clamp(0.75rem, 1.5vw, 0.9rem) clamp(1rem, 2.5vw, 1.6rem)",
+                fontSize: "clamp(0.7rem, 1.5vw, 0.78rem)",
                 fontWeight: 800,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 textDecoration: "none",
                 borderRadius: 3,
                 border: "2px solid var(--ink)",
-                transition: "background 0.2s, color 0.2s",
+                transition: "background 0.2s, color 0.2s, border-color 0.2s",
               }}
             >
               View Pricing
@@ -170,7 +192,7 @@ export function HeroSection() {
 
         {/* Feature pills */}
         <Reveal delay={0.6} y={16}>
-          <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
             {featurePills.map((pill, i) => (
               <motion.span
                 key={pill}
@@ -178,14 +200,15 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + i * 0.07, duration: 0.4, ease: EASE }}
                 style={{
-                  fontSize: "0.7rem",
+                  fontSize: "clamp(0.62rem, 1.4vw, 0.7rem)",
                   fontWeight: 700,
                   color: "var(--muted)",
                   background: "#f3f4f6",
-                  padding: "0.3rem 0.75rem",
+                  padding: "0.28rem 0.7rem",
                   borderRadius: 99,
                   border: "1px solid var(--border)",
                   letterSpacing: "0.04em",
+                  whiteSpace: "nowrap",
                 }}
               >
                 ✓ {pill}
@@ -196,9 +219,12 @@ export function HeroSection() {
       </div>
 
       {/* ── RIGHT: Premium floating car ── */}
-      <Reveal delay={0.2} y={40} style={{ position: "relative" }}>
-        {/* Outer positioning wrapper — no box, no border */}
-        <div style={{ position: "relative", minHeight: 500 }}>
+      <div style={{ position: "relative" }}>
+        {/* Outer positioning wrapper */}
+        <div
+          className="hero-right-panel"
+          style={{ position: "relative", minHeight: "clamp(280px, 50vw, 520px)" }}
+        >
 
           {/* ── Decorative background circle ── */}
           <svg
@@ -211,12 +237,9 @@ export function HeroSection() {
             }}
             viewBox="0 0 400 400"
           >
-            {/* Large pale-red outer ring */}
-            <circle cx="200" cy="200" r="195" fill="none" stroke="var(--accent)" strokeWidth="1.5" opacity="0.12" />
-            <circle cx="200" cy="200" r="155" fill="none" stroke="var(--accent)" strokeWidth="1" opacity="0.08" />
-            {/* Solid tinted disc */}
-            <circle cx="200" cy="200" r="120" fill="#cc0033" opacity="0.04" />
-            {/* Dot grid */}
+            <circle cx="200" cy="200" r="195" fill="none" stroke="var(--yellow)" strokeWidth="1.5" opacity="0.25" />
+            <circle cx="200" cy="200" r="155" fill="none" stroke="var(--yellow)" strokeWidth="1" opacity="0.14" />
+            <circle cx="200" cy="200" r="120" fill="var(--yellow)" opacity="0.05" />
             {[...Array(7)].map((_, row) =>
               [...Array(7)].map((__, col) => (
                 <circle
@@ -231,13 +254,12 @@ export function HeroSection() {
             )}
           </svg>
 
-          {/* ── 3D Canvas (no box, transparent bg) ── */}
+          {/* ── 3D Canvas ── */}
           <div
             style={{
               position: "absolute",
-              inset: "10% 0 10% 0",
+              inset: "5% 0 5% 0",
               zIndex: 1,
-              /* touch-action fix for gesture lib warning */
               touchAction: "none",
             }}
           >
@@ -256,7 +278,7 @@ export function HeroSection() {
               display: "flex",
               alignItems: "center",
               gap: "0.35rem",
-              fontSize: "0.6rem",
+              fontSize: "clamp(0.52rem, 1vw, 0.6rem)",
               fontWeight: 700,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
@@ -264,54 +286,56 @@ export function HeroSection() {
               zIndex: 2,
             }}
           >
-            <span style={{ width: 16, height: 1, background: "var(--muted)", display: "block" }} />
+            <span style={{ width: 14, height: 1, background: "var(--muted)", display: "block" }} />
             Drag to rotate
           </motion.div>
 
           {/* ── Floating stat: 100% ── */}
           <motion.div
-            initial={{ opacity: 0, x: -24, y: 0 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
+            className="hero-stat-left"
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.4, duration: 0.55, ease: EASE }}
             style={{
               position: "absolute",
               bottom: "28%",
-              left: "-1.5rem",
+              left: "-1rem",
               background: "#ffffff",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
               border: "1.5px solid var(--border)",
-              padding: "0.75rem 1.1rem",
+              padding: "clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1.1rem)",
               borderRadius: 6,
               zIndex: 3,
-              minWidth: 110,
+              minWidth: 100,
             }}
           >
-            <p style={{ fontWeight: 900, fontSize: "1.8rem", color: "var(--ink)", lineHeight: 1 }}>100%</p>
-            <p style={{ fontSize: "0.55rem", fontWeight: 800, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--muted)", marginTop: 3 }}>
+            <p style={{ fontWeight: 900, fontSize: "clamp(1.3rem, 3vw, 1.8rem)", color: "var(--ink)", lineHeight: 1 }}>100%</p>
+            <p style={{ fontSize: "clamp(0.48rem, 1vw, 0.55rem)", fontWeight: 800, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--muted)", marginTop: 3 }}>
               Pass Rate
             </p>
           </motion.div>
 
           {/* ── Floating stat: 5000+ ── */}
           <motion.div
+            className="hero-stat-right"
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.6, duration: 0.55, ease: EASE }}
             style={{
               position: "absolute",
               top: "18%",
-              right: "-1rem",
+              right: "-0.75rem",
               background: "var(--accent)",
-              boxShadow: "0 8px 32px rgba(204,0,51,0.28)",
-              padding: "0.75rem 1.1rem",
+              boxShadow: "0 8px 32px rgba(0,102,255,0.3)",
+              padding: "clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1.1rem)",
               borderRadius: 6,
               zIndex: 3,
-              minWidth: 100,
+              minWidth: 90,
               color: "#fff",
             }}
           >
-            <p style={{ fontWeight: 900, fontSize: "1.6rem", lineHeight: 1 }}>5000+</p>
-            <p style={{ fontSize: "0.55rem", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", opacity: 0.85, marginTop: 3 }}>
+            <p style={{ fontWeight: 900, fontSize: "clamp(1.1rem, 2.5vw, 1.6rem)", lineHeight: 1 }}>5000+</p>
+            <p style={{ fontSize: "clamp(0.48rem, 1vw, 0.55rem)", fontWeight: 800, letterSpacing: "0.18em", textTransform: "uppercase", opacity: 0.85, marginTop: 3 }}>
               Graduates
             </p>
           </motion.div>
@@ -324,40 +348,54 @@ export function HeroSection() {
             style={{
               position: "absolute",
               bottom: "6%",
-              left: "10%",
-              right: "10%",
+              left: "8%",
+              right: "8%",
               background: "var(--yellow)",
               border: "1.5px solid var(--ink)",
-              padding: "0.55rem 1rem",
+              padding: "0.5rem 0.85rem",
               borderRadius: 4,
               display: "flex",
               alignItems: "center",
-              gap: "0.5rem",
+              gap: "0.4rem",
               zIndex: 3,
             }}
           >
             <div style={{ display: "flex", gap: 2 }}>
-              {[...Array(5)].map((_, i) => <Star key={i} size={11} style={{ fill: "var(--ink)", color: "var(--ink)" }} />)}
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} width="10" height="10" viewBox="0 0 12 12" fill="var(--ink)">
+                  <path d="M6 0l1.5 4H12l-3.6 2.6L9.7 11 6 8.2 2.3 11l1.3-4.4L0 4h4.5z" />
+                </svg>
+              ))}
             </div>
-            <p style={{ fontSize: "0.6rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--ink)" }}>
+            <p style={{
+              fontSize: "clamp(0.52rem, 1vw, 0.6rem)",
+              fontWeight: 800,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "var(--ink)",
+              whiteSpace: "nowrap",
+            }}>
               Trusted by 5000+ Local Drivers
             </p>
           </motion.div>
 
-          {/* ── Decorative red vertical stripe ── */}
-          <div style={{
-            position: "absolute",
-            right: "-1.5rem",
-            top: "15%",
-            bottom: "15%",
-            width: 3,
-            background: "linear-gradient(180deg, transparent, var(--accent) 40%, var(--accent) 60%, transparent)",
-            borderRadius: 2,
-            zIndex: 0,
-            opacity: 0.5,
-          }} />
+          {/* ── Decorative yellow vertical stripe ── */}
+          <div
+            className="hero-deco-stripe"
+            style={{
+              position: "absolute",
+              right: "-1.25rem",
+              top: "15%",
+              bottom: "15%",
+              width: 3,
+              background: "linear-gradient(180deg, transparent, var(--yellow) 40%, var(--yellow) 60%, transparent)",
+              borderRadius: 2,
+              zIndex: 0,
+              opacity: 0.5,
+            }}
+          />
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }

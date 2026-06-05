@@ -57,17 +57,25 @@ export function RevealText({
   const words = text.split(" ");
 
   return (
-    <span ref={ref} className={className} style={{ display: "inline", ...style }}>
-      {words.map((word, i) => (
-        <span key={i} style={{ display: "inline-block", overflow: "hidden", marginRight: "0.25em" }}>
-          <motion.span
-            style={{ display: "inline-block" }}
-            initial={{ y: "110%" }}
-            animate={inView ? { y: 0 } : { y: "110%" }}
-            transition={{ duration: 0.6, delay: delay + i * 0.06, ease: EASE }}
-          >
-            {word}
-          </motion.span>
+    <span ref={ref} className={className} style={{ display: "inline-block", ...style }}>
+      {words.map((word, wordIndex) => (
+        <span key={wordIndex} style={{ display: "inline-block", marginRight: "0.25em", whiteSpace: "nowrap" }}>
+          {word.split("").map((char, charIndex) => (
+            <span key={charIndex} style={{ display: "inline-block", overflow: "hidden" }}>
+              <motion.span
+                style={{ display: "inline-block", transformOrigin: "bottom left" }}
+                initial={{ y: "110%", skewY: 5, rotateZ: 5 }}
+                animate={inView ? { y: 0, skewY: 0, rotateZ: 0 } : { y: "110%", skewY: 5, rotateZ: 5 }}
+                transition={{ 
+                  duration: 0.7, 
+                  delay: delay + (wordIndex * 0.1) + (charIndex * 0.03), 
+                  ease: [0.25, 1, 0.5, 1] 
+                }}
+              >
+                {char}
+              </motion.span>
+            </span>
+          ))}
         </span>
       ))}
     </span>
@@ -139,3 +147,31 @@ export const staggerChild = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
 };
+
+export function Reveal3D({
+  children,
+  delay = 0,
+  className,
+  style,
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px 0px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 100, rotateX: -45, scale: 0.9, transformPerspective: 1000 }}
+      animate={inView ? { opacity: 1, y: 0, rotateX: 0, scale: 1 } : { opacity: 0, y: 100, rotateX: -45, scale: 0.9 }}
+      transition={{ duration: 0.85, delay, ease: [0.25, 1, 0.5, 1] }}
+      className={className}
+      style={{ transformStyle: "preserve-3d", ...style }}
+    >
+      {children}
+    </motion.div>
+  );
+}

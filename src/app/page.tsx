@@ -4,7 +4,6 @@ import { useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Preloader } from "@/components/Preloader";
 import { SmoothScroll } from "@/components/SmoothScroll";
-import { CustomCursor } from "@/components/CustomCursor";
 import { SiteHeader } from "@/components/SiteHeader";
 import { HeroSection } from "@/components/HeroSection";
 import { MarqueeTicker } from "@/components/MarqueeTicker";
@@ -23,38 +22,37 @@ export default function Home() {
 
   return (
     <>
-      {/* Custom cursor */}
-      <CustomCursor />
-
       {/* Noise texture */}
       <div className="noise-overlay" />
 
       {/* Preloader */}
       <Preloader onComplete={handlePreloaderDone} />
 
-      {/* Main site */}
+      {/* Fixed header — lives outside <main> so position:fixed always works */}
+      {loaded && <SiteHeader />}
+
+      {/* Main site fades in after preloader */}
       <AnimatePresence>
         {loaded && (
           <motion.div
             key="main"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, ease: EASE }}
+            transition={{ duration: 0.6, ease: EASE }}
           >
             <SmoothScroll>
-              <main style={{ overflowX: "hidden", background: "var(--bg)" }}>
-                <SiteHeader />
-
+              {/* paddingTop offsets the fixed header */}
+              <main style={{ paddingTop: "clamp(60px, 8vw, 72px)" }}>
                 {/* Hero */}
                 <div className="container">
                   <HeroSection />
                 </div>
 
-                {/* Marquee ticker between hero and content */}
+                {/* Marquee ticker */}
                 <MarqueeTicker />
 
-                {/* Main content sections */}
-                <div className="container" style={{ paddingBottom: "4rem" }}>
+                {/* Main content */}
+                <div className="container" style={{ paddingBottom: "5rem" }}>
                   <MainContent />
                 </div>
 
