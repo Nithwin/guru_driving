@@ -7,20 +7,20 @@
 
 /* ── Design Tokens ── */
 :root {
-  --bg: #f8f8f6;
+  --bg: #fcfbf6;
   --surface: #ffffff;
-  --ink: #0d0d0d;
+  --ink: #080605;
   --muted: #6b7280;
   --muted-light: #9ca3af;
   --accent: #0055e9;
   --accent-dark: #0041c2;
   --accent-glow: rgba(0, 85, 233, 0.22);
-  --yellow: #ffd500;
-  --yellow-light: #ffe566;
-  --yellow-warm: #ffe033;
-  --yellow-dark: #c9a600;
-  --yellow-deep: #997f00;
-  --yellow-ink: #1a1500;
+  --yellow: #feef00;
+  --yellow-light: #fff44d;
+  --yellow-warm: #ffea00;
+  --yellow-dark: #b09b16;
+  --yellow-deep: #64571d;
+  --yellow-ink: #080605;
   --warm-dark: #111111;
   --border: #e4e4e0;
   --border-dark: #111827;
