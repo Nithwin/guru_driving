@@ -35,8 +35,8 @@ function CountUp({ target, suffix = "" }: { target: number | string; suffix?: st
 
 const stats = [
   { value: 5000, suffix: "+", label: "Students Passed", icon: Users },
-  { value: 15, suffix: "+", label: "Expert Trainers", icon: Award },
-  { value: "24/7", suffix: "", label: "Online Support", icon: Headphones },
+  { value: 12, suffix: "+", label: "Years Experience", icon: Award },
+  { value: "24/7", suffix: "", label: "Support Available", icon: Headphones },
   { value: 100, suffix: "%", label: "Pass Guarantee", icon: CheckSquare },
 ];
 

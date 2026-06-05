@@ -16,10 +16,10 @@ const socials = [
 
 const quickLinks = [
   { label: "Training Plans", href: "#plans" },
-  { label: "Our Fleet", href: "#fleet" },
+  { label: "Meet Vignesh", href: "#trainer" },
   { label: "Testimonials", href: "#reviews" },
   { label: "FAQs", href: "#faq" },
-  { label: "Book Now", href: "#contact" },
+  { label: "Get a Callback", href: "#contact" },
 ];
 
 export function SiteFooter() {

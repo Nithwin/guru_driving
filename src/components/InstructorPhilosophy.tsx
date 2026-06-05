@@ -19,7 +19,7 @@ export function InstructorPhilosophy() {
   const imageY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
 
   return (
-    <section style={{ marginTop: "var(--section-gap, 5rem)" }}>
+    <section id="trainer" style={{ marginTop: "var(--section-gap, 5rem)" }}>
       <Reveal>
         <div
           style={{
@@ -50,10 +50,9 @@ export function InstructorPhilosophy() {
                 style={{ objectFit: "cover" }}
               />
             </motion.div>
-            {/* Subtle overlay */}
             <div style={{
               position: "absolute", inset: 0,
-              background: "linear-gradient(135deg, rgba(204,0,51,0.08) 0%, transparent 50%)",
+              background: "linear-gradient(135deg, rgba(0,85,233,0.06) 0%, transparent 50%)",
               pointerEvents: "none",
             }} />
 

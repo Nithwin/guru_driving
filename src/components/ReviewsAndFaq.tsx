@@ -34,7 +34,7 @@ function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
         overflow: "hidden",
         background: "#fff",
         transition: "border-color 0.2s",
-        ...(open ? { borderColor: "rgba(204,0,51,0.25)" } : {}),
+        ...(open ? { borderColor: "rgba(0,85,233,0.25)" } : {}),
       }}
     >
       <button
@@ -45,7 +45,7 @@ function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "clamp(0.85rem, 2vw, 1rem) clamp(0.85rem, 2vw, 1.1rem)",
-          background: open ? "rgba(204,0,51,0.03)" : "none",
+          background: open ? "rgba(0,85,233,0.03)" : "none",
           border: "none",
           cursor: "pointer",
           textAlign: "left",
@@ -126,7 +126,7 @@ export function ReviewsAndFaq() {
                 position: "absolute",
                 top: "0.85rem",
                 right: "0.85rem",
-                color: "rgba(204,0,51,0.08)",
+                color: "rgba(0,85,233,0.1)",
               }}>
                 <Quote size={28} />
               </div>
@@ -149,7 +149,7 @@ export function ReviewsAndFaq() {
                   width: 30,
                   height: 30,
                   borderRadius: "50%",
-                  background: "linear-gradient(135deg, var(--accent) 0%, #ff4d6d 100%)",
+                  background: "linear-gradient(135deg, var(--accent) 0%, #4d8eff 100%)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -193,15 +193,15 @@ export function ReviewsAndFaq() {
         <div style={{
           marginTop: "1.5rem",
           padding: "1rem 1.1rem",
-          background: "#fef9e7",
-          border: "1.5px solid var(--yellow-dark)",
+          background: "rgba(0,85,233,0.04)",
+          border: "1.5px solid rgba(0,85,233,0.15)",
           borderRadius: 5,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           gap: "0.75rem",
         }}>
-          <p style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--yellow-ink)", lineHeight: 1.4 }}>
+          <p style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--accent)", lineHeight: 1.4 }}>
             Still have questions?
           </p>
           <a

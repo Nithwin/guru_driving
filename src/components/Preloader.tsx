@@ -111,7 +111,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
                 position: "absolute",
                 width: "40vw",
                 height: "40vw",
-                background: "radial-gradient(circle, rgba(204,0,51,0.12) 0%, transparent 70%)",
+                background: "radial-gradient(circle, rgba(0,85,233,0.12) 0%, transparent 70%)",
                 borderRadius: "50%",
                 pointerEvents: "none",
                 zIndex: 0
@@ -211,7 +211,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
                     height: "100%",
                     background: "var(--accent)",
                     width: `${progress}%`,
-                    boxShadow: "0 0 15px rgba(204,0,51,0.5)",
+                    boxShadow: "0 0 12px rgba(0,85,233,0.5)",
                   }}
                 />
               </motion.div>

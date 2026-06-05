@@ -113,10 +113,9 @@ export function WhyChoose() {
           </div>
         </motion.div>
 
-        {/* Cell 3 – red: Top Fleet */}
         <motion.div
           className="feature-cell red"
-          whileHover={{ scale: 1.02 }}
+          whileHover={{ scale: 1.02, opacity: 0.92 }}
           transition={{ duration: 0.22 }}
           style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}
         >
