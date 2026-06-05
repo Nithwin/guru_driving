@@ -43,9 +43,11 @@ function CarMesh() {
     scene.traverse((child: any) => {
       if (child.isMesh && child.material) {
         const mats = Array.isArray(child.material) ? child.material : [child.material];
-        mats.forEach(m => {
+        mats.forEach((m: any) => {
           if (m.name && m.name.toLowerCase().includes("paint")) {
-            m.color.set("#0066ff");
+            if (m.color) {
+              m.color.set("#0066ff");
+            }
           }
         });
       }

@@ -33,7 +33,7 @@ export function FleetShowcase() {
   return (
     <>
       {/* ════ TRAINER PROFILE ════ */}
-      <section id="trainer" style={{ marginTop: "var(--section-gap, 5rem)" }}>
+      <section id="fleet" style={{ marginTop: "var(--section-gap, 5rem)" }}>
         <Reveal style={{ textAlign: "center", marginBottom: "clamp(1.5rem, 3vw, 2.5rem)" }}>
           <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>Meet Your Instructor</p>
           <h2 className="section-title">

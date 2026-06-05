@@ -1,14 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Phone, Menu, X } from "lucide-react";
 
+/** Scroll to a section by ID. Works reliably with or without Lenis. */
+function scrollToSection(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const headerHeight = 80;
+  const top = el.getBoundingClientRect().top + window.scrollY - headerHeight;
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
 const NAV = [
   { label: "Home", href: "#home" },
-  { label: "Plans", href: "#plans" },
   { label: "Instructor", href: "#trainer" },
+  { label: "Plans", href: "#plans" },
   { label: "Reviews", href: "#reviews" },
   { label: "Contact", href: "#contact" },
 ];
@@ -86,7 +95,11 @@ export function SiteHeader() {
         {/* Logo */}
         <a
           href="#home"
-          onClick={() => setActive("home")}
+          onClick={(e) => {
+            e.preventDefault();
+            setActive("home");
+            scrollToSection("home");
+          }}
           style={{
             display: "flex",
             alignItems: "center",
@@ -132,7 +145,11 @@ export function SiteHeader() {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={() => setActive(id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActive(id);
+                  scrollToSection(id);
+                }}
                 className="nav-link"
                 style={{
                   color: isActive ? "var(--accent)" : undefined,
@@ -262,7 +279,12 @@ export function SiteHeader() {
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05, duration: 0.25 }}
-                    onClick={() => { setActive(id); setOpen(false); }}
+                    onClick={(e) => { 
+                      e.preventDefault();
+                      setActive(id); 
+                      setOpen(false); 
+                      scrollToSection(id);
+                    }}
                     style={{
                       padding: "0.85rem 0",
                       fontSize: "0.9rem",

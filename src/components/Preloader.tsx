@@ -68,7 +68,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
       clearTimeout(safetyTimer);
       window.removeEventListener("car-model-loaded", onModelLoaded);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onComplete]);
 
 
@@ -103,7 +103,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
             }}
           >
             {/* Ambient Red Glow in center */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 0.5, scale: 1 }}
               transition={{ duration: DURATION / 1000, ease: "linear" }}
@@ -141,7 +141,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
             </motion.div>
 
             {/* Content Container */}
-            <motion.div 
+            <motion.div
               exit={{ opacity: 0, y: -40 }}
               transition={{ duration: 0.6, ease: EASE }}
               style={{ zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}
@@ -247,7 +247,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
               />
             ))}
           </motion.div>
-          
+
           {/* Overlay yellow shutter that slides up slightly after the black one */}
           <motion.div
             initial={{ y: "100%" }}
